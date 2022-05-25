@@ -4,6 +4,7 @@ import SettingGender from "./components/SettingGender";
 import SettingStyle from "./components/SettingStyle";
 import SettingTime from "./components/SettingTime";
 import SettingLocation from "./components/SettingLocation";
+import Congratulation from "./components/Congratulation";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
                 <Route path='/setting_style' element={ <SettingStyle />} />
                 <Route path='/setting_time' element={ <SettingTime />}/>
                 <Route path='/setting_location' element={<SettingLocation />}/>
+                <Route path='/setting_done' element={<Congratulation />} />
             </Routes>
           </Router>
       </div>
