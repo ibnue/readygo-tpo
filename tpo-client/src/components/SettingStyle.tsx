@@ -39,6 +39,7 @@ const StyleOptions = styled.div`
   height: 48px;
   background-color: #F9F9F9;
   border-radius: 100px;
+  cursor: pointer;
   
   
   .check-box{
@@ -66,17 +67,17 @@ const FooterWrap = styled.footer`
   height: 52px;
   position: fixed;
   bottom: 40px;
-  
+  cursor: pointer;
   div{
     position: relative;
-    font-size: 30px;
+    font-size: 18px;
     color: white;
-    top: 8px;
+    top: 16px;
   }
 `;
 
 
-function StyleSetting() {
+function SettingStyle() {
     const [option, setOption] = useState(['Casual','Street','Office','Romantic','Sexy/Glamorous','Unique','Unisex',])
     return(
         <div>
@@ -106,4 +107,4 @@ function StyleSetting() {
     )
 }
 
-export default StyleSetting;
+export default SettingStyle;

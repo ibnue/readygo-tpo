@@ -42,11 +42,12 @@ const InputContainer = styled.div`
     border-radius: 30px;
     width: 80%;
     height: 60px;
+    cursor: pointer;
     
     span{
-      font-size: 30px;
+      font-size: 18px;
       position: relative;
-      top: 12px;
+      top: 20px;
     }
   }
   
@@ -57,6 +58,7 @@ const MaleWrap = styled.div`
   height: 40px;
   background-color: #F9F9F9;
   border-radius: 30px;
+  cursor: pointer;
   
   .check-box{
     position: relative;
@@ -79,6 +81,7 @@ const FemaleWrap = styled.div`
   height: 40px;
   background-color: #F9F9F9;
   border-radius: 30px;
+  cursor: pointer;
   
   .check-box{
     position: relative;
