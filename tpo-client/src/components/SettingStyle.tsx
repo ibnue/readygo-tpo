@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
+import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {BsCheckCircleFill as Checkbox} from "react-icons/bs";
+import backBtn from '../icons/icon-4.png'
 
 
 const Header = styled.header`
@@ -11,6 +13,13 @@ const Header = styled.header`
   
   span{
     position: relative;
+    top: 13px;
+  }
+  
+  img{
+    cursor: pointer;
+    position: relative;
+    right: 108px;
     top: 13px;
   }
 `;
@@ -79,9 +88,16 @@ const FooterWrap = styled.footer`
 
 function SettingStyle() {
     const [option, setOption] = useState(['Casual','Street','Office','Romantic','Sexy/Glamorous','Unique','Unisex',])
+    const navigate = useNavigate();
+    function onClickHandler() {
+        navigate('/setting_time');
+    }
     return(
         <div>
             <Header>
+                <img src={backBtn} alt='backButton' onClick={() => {
+                    navigate(-1);
+                }}/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
@@ -97,7 +113,7 @@ function SettingStyle() {
                             </StyleOptions>
                         )
                     })}
-                <FooterWrap>
+                <FooterWrap onClick={onClickHandler}>
                     <div>Next</div>
                 </FooterWrap>
             </SelectStyledWrapper>

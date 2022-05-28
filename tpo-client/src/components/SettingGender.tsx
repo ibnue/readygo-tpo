@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useNavigate} from "react-router-dom";
 import exp from "constants";
 import styled from "styled-components";
 import {BsCheckCircleFill as Checkbox} from 'react-icons/bs'
+import backBtn from '../icons/icon-4.png'
 
 
 const Header = styled.header`
@@ -9,8 +11,15 @@ const Header = styled.header`
   font-size: 20px;
   font-weight: 500;
   height: 52px;
+  
   span{
     position: relative;
+    top: 13px;
+  }
+  
+  img{
+    position: relative;
+    right: 108px;
     top: 13px;
   }
 `;
@@ -103,9 +112,14 @@ const FemaleWrap = styled.div`
 
 
 function SettingGender() {
+    const navigate = useNavigate();
+    function onClickHandler() {
+        navigate('/setting_style');
+    }
     return(
         <div>
             <Header>
+                <img src={backBtn} alt='backButton'/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
@@ -121,7 +135,7 @@ function SettingGender() {
                     <Checkbox className='check-box'/>
                     <span>Female</span>
                 </FemaleWrap>
-                <footer>
+                <footer onClick={onClickHandler} aria-hidden='true'>
                     <span>Next</span>
                 </footer>
             </InputContainer>

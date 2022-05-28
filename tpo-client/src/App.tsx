@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from "styled-components";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import SettingGender from "./components/SettingGender";
 import SettingStyle from "./components/SettingStyle";
@@ -7,9 +8,16 @@ import SettingLocation from "./components/SettingLocation";
 import Congratulation from "./components/Congratulation";
 
 
+
+const GlobalStyle = styled.div`
+  margin: 0;
+  padding: 0;
+`;
+
+
 function App() {
   return (
-      <div>
+      <GlobalStyle>
           <Router>
             <Routes>
                 <Route path='/setting_gender' element={ <SettingGender/> } />
@@ -19,7 +27,7 @@ function App() {
                 <Route path='/setting_done' element={<Congratulation />} />
             </Routes>
           </Router>
-      </div>
+      </GlobalStyle>
   );
 }
 

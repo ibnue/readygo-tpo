@@ -1,5 +1,9 @@
 import React from 'react'
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom'
+import styled from "styled-components"
+import backBtn from '../icons/icon-4.png'
+
+
 
 const Header = styled.header`
   text-align: center;
@@ -10,6 +14,12 @@ const Header = styled.header`
     position: relative;
     top: 13px;
   };
+  img{
+    cursor: pointer;
+    position: relative;
+    right: 108px;
+    top: 13px;
+  }
 `;
 
 
@@ -90,9 +100,17 @@ const FooterWrap = styled.footer`
   }
 `;
 function SettingTime() {
+
+    const navigate = useNavigate()
+    function onClickHandle() {
+        navigate('/setting_location');
+    }
     return(
         <div>
             <Header>
+                <img src={backBtn} alt='backButton' onClick={() => {
+                    navigate(-1)
+                }}/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
@@ -106,7 +124,7 @@ function SettingTime() {
                     <div className='end-point'>b</div>
                     <div className='end-time'>18:00</div>
                 </SliderBar>
-                <FooterWrap>
+                <FooterWrap onClick={onClickHandle}>
                     <div>Next</div>
                 </FooterWrap>
             </SliderWrap>

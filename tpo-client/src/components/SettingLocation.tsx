@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {FiSearch as SearchIcon} from 'react-icons/fi';
 import { MdCancel as DeleteBtn} from 'react-icons/md';
+import backBtn from '../icons/icon-4.png'
 
 const Header = styled.header`
   text-align: center;
@@ -12,6 +14,12 @@ const Header = styled.header`
     position: relative;
     top: 13px;
   };
+  img{
+    cursor: pointer;
+    position: relative;
+    right: 98px;
+    top: 13px;
+  }
 `;
 
 const SettingTitle = styled.div`
@@ -78,9 +86,16 @@ const FooterWrap = styled.footer`
 `;
 
 function SettingLocation() {
+    const navigate = useNavigate()
+    function onClickHandler() {
+        navigate('/setting_done')
+    }
     return(
         <div>
             <Header>
+                <img src={backBtn} alt='backButton' onClick={() => {
+                    navigate(-1);
+                }}/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
@@ -91,7 +106,7 @@ function SettingLocation() {
                 <SearchIcon className='search-icon' />
                 <input className='search-bar' type ='text' placeholder='Search location'/>
                 <DeleteBtn className='delete-btn'/>
-                <FooterWrap>
+                <FooterWrap onClick={onClickHandler}>
                     <div>Done</div>
                 </FooterWrap>
             </SearchContainer>
