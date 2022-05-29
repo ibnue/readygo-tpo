@@ -1,10 +1,53 @@
 import React, {useState} from 'react'
 import {useNavigate} from "react-router-dom";
-import exp from "constants";
 import styled from "styled-components";
 import {BsCheckCircleFill as Checkbox} from 'react-icons/bs'
 import backBtn from '../icons/icon-4.png'
 
+
+
+
+
+
+
+function SettingGender() {
+    const navigate = useNavigate();
+    const [click, setClick] = useState(0);
+    const [gender, setGender] = useState(['Male','Female']);
+    const [color, setColor] = useState('#F9F9F9');
+    const onClickHandler = () => {
+        navigate('/setting_style');
+    }
+    const onClickChange = () => {
+        color === '#F9F9F9' ? setColor('black') : setColor('#F9F9F9');
+    }
+
+    return(
+        <div>
+            <Header>
+                <img src={backBtn} alt='backButton'/>
+                <span>User Setting</span>
+            </Header>
+            <SettingTitle>
+                <span>Gender</span>
+                <span>1/4</span>
+            </SettingTitle>
+            <InputContainer>
+                {gender.map( (value,index) => {
+                    return(
+                        <SelectorWrap onClick={onClickChange}>
+                            <Checkbox className='check-box' color={color} />
+                            <span>{value}</span>
+                        </SelectorWrap>
+                    )
+                })}
+                <footer onClick={onClickHandler} aria-hidden='true'>
+                    <span>Next</span>
+                </footer>
+            </InputContainer>
+        </div>
+    )
+}
 
 const Header = styled.header`
   text-align: center;
@@ -62,7 +105,7 @@ const InputContainer = styled.div`
   
 `;
 
-const MaleWrap = styled.div`
+const SelectorWrap = styled.div`
   width: 160px;
   height: 40px;
   background-color: #F9F9F9;
@@ -71,76 +114,18 @@ const MaleWrap = styled.div`
   
   .check-box{
     position: relative;
-    right: 10px;
-    top: 10px;
-    color: black; // 클릭 이벤트 발생시 #F9F9F9 컬러에서 -> black 컬로 변경 
-    border: 1px solid #A1A1A1;
+    right: 40px;
+    top: 11px;
+    color: ${props => props.color};//#F9F9F9; // 클릭 이벤트 발생시 #F9F9F9 컬러에서 -> black 컬로 변경 
+    border: 1px solid #A1A1A1; // 클릭 이벤트시 -> none 으로 변경
     border-radius: 10px;
   }
 
   span{
     position: relative;
     top: 8px;
-    right: 4px;
+    right: 24px;
   }
 `;
-
-const FemaleWrap = styled.div`
-  width: 160px;
-  height: 40px;
-  background-color: #F9F9F9;
-  border-radius: 30px;
-  cursor: pointer;
-  
-  .check-box{
-    position: relative;
-    right: 12px;
-    top: 10px;
-    color: #F9F9F9;
-    border: 1px solid #A1A1A1;
-    border-radius: 10px;
-  } 
-  
-  span{
-    position: relative;
-    top: 8px;
-    right: 4px;
-  }
-`;
-
-
-
-
-function SettingGender() {
-    const navigate = useNavigate();
-    function onClickHandler() {
-        navigate('/setting_style');
-    }
-    return(
-        <div>
-            <Header>
-                <img src={backBtn} alt='backButton'/>
-                <span>User Setting</span>
-            </Header>
-            <SettingTitle>
-                <span>Gender</span>
-                <span>1/4</span>
-            </SettingTitle>
-            <InputContainer>
-                <MaleWrap>
-                    <Checkbox className='check-box'/>
-                    <span>Male</span>
-                </MaleWrap>
-                <FemaleWrap>
-                    <Checkbox className='check-box'/>
-                    <span>Female</span>
-                </FemaleWrap>
-                <footer onClick={onClickHandler} aria-hidden='true'>
-                    <span>Next</span>
-                </footer>
-            </InputContainer>
-        </div>
-    )
-}
 
 export default SettingGender;
