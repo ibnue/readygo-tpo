@@ -1,9 +1,10 @@
 import React from 'react';
+import Home from '../src/components/Main/Home'
 
 function App() {
   return (
     <div>
-      Learn React
+      <Home />
     </div>
   );
 }
