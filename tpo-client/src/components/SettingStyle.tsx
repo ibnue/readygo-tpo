@@ -2,8 +2,47 @@ import React, {useState} from 'react'
 import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {BsCheckCircleFill as Checkbox} from "react-icons/bs";
-import backBtn from '../icons/icon-4.png'
+import backBtn from '../icons/icon-5.png'
 
+
+
+
+function SettingStyle() {
+    const [option, setOption] = useState(['Casual','Street','Office','Romantic','Sexy/Glamorous','Unique','Unisex',])
+    const navigate = useNavigate();
+
+    const onClickHandler = () => {
+        navigate('/setting_time');
+    }
+
+    return(
+        <div>
+            <Header>
+                <img src={backBtn} alt='backButton' onClick={() => {
+                    navigate(-1);
+                }} onKeyDown={onClickHandler}/>
+                <span>User Setting</span>
+            </Header>
+            <SettingTitle>
+                <span>Gender</span>
+                <span>1/4</span>
+            </SettingTitle>
+            <SelectStyledWrapper>
+                    {option.map( (value,index) => {
+                        return(
+                            <StyleOptions>
+                                <Checkbox className='check-box'/>
+                                <span>{value}</span>
+                            </StyleOptions>
+                        )
+                    })}
+                <FooterWrap onClick={onClickHandler}>
+                    <div>Next</div>
+                </FooterWrap>
+            </SelectStyledWrapper>
+        </div>
+    )
+}
 
 const Header = styled.header`
   text-align: center;
@@ -85,42 +124,5 @@ const FooterWrap = styled.footer`
   }
 `;
 
-
-function SettingStyle() {
-    const [option, setOption] = useState(['Casual','Street','Office','Romantic','Sexy/Glamorous','Unique','Unisex',])
-    const navigate = useNavigate();
-    function onClickHandler() {
-        navigate('/setting_time');
-    }
-    return(
-        <div>
-            <Header>
-                <img src={backBtn} alt='backButton' onClick={() => {
-                    navigate(-1);
-                }}/>
-                <span>User Setting</span>
-            </Header>
-            <SettingTitle>
-                <span>Gender</span>
-                <span>1/4</span>
-            </SettingTitle>
-            <SelectStyledWrapper>
-                    {option.map( (value,index) => {
-                        return(
-                            <StyleOptions>
-                                <Checkbox className='check-box'/>
-                                <span>{value}</span>
-                            </StyleOptions>
-                        )
-                    })}
-                <FooterWrap onClick={onClickHandler}>
-                    <div>Next</div>
-                </FooterWrap>
-            </SelectStyledWrapper>
-
-
-        </div>
-    )
-}
 
 export default SettingStyle;

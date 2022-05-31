@@ -1,52 +1,56 @@
-import React, {useState} from 'react'
-import {useNavigate} from "react-router-dom";
-import styled from "styled-components";
-import {BsCheckCircleFill as Checkbox} from 'react-icons/bs'
-import backBtn from '../icons/icon-4.png'
-
-
-
-
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { BsCheckCircleFill as Checkbox } from 'react-icons/bs';
+import backBtn from '../icons/icon-5.png';
 
 
 function SettingGender() {
-    const navigate = useNavigate();
-    const [click, setClick] = useState(0);
-    const [gender, setGender] = useState(['Male','Female']);
-    const [color, setColor] = useState('#F9F9F9');
-    const onClickHandler = () => {
-        navigate('/setting_style');
-    }
-    const onClickChange = () => {
-        color === '#F9F9F9' ? setColor('black') : setColor('#F9F9F9');
-    }
+  const navigate = useNavigate();
+  const [gender, setGender] = useState<string>();
 
-    return(
-        <div>
-            <Header>
-                <img src={backBtn} alt='backButton'/>
-                <span>User Setting</span>
-            </Header>
-            <SettingTitle>
-                <span>Gender</span>
-                <span>1/4</span>
-            </SettingTitle>
-            <InputContainer>
-                {gender.map( (value,index) => {
-                    return(
-                        <SelectorWrap onClick={onClickChange}>
-                            <Checkbox className='check-box' color={color} />
-                            <span>{value}</span>
-                        </SelectorWrap>
-                    )
-                })}
-                <footer onClick={onClickHandler} aria-hidden='true'>
-                    <span>Next</span>
-                </footer>
-            </InputContainer>
-        </div>
-    )
+  const GENDER = {
+    man: 'male',
+    woman: 'female',
+  };
+
+  const onClickHandler = () => {
+    navigate('/setting_style');
+  };
+  return (
+    <div>
+      <Header>
+        <img src={backBtn} alt='backButton' />
+        <span>User Setting</span>
+      </Header>
+      <SettingTitle>
+        <span>Gender</span>
+        <span>1/4</span>
+      </SettingTitle>
+      <InputContainer>
+        {['male', 'female'].map((obj) => {
+          return (
+            <SelectorWrap onClick={() => {
+              setGender(obj);
+            }} isChecked={gender === obj}>
+              <Checkbox className='check-box' />
+              <span>{obj}</span>
+            </SelectorWrap>
+          );
+        })
+        }
+        {
+          gender === GENDER.man || gender === GENDER.woman ? <footer onClick={onClickHandler} aria-hidden='true' style={{ backgroundColor: '#3A3F45' }}>
+            <span>Next</span>
+          </footer> : <footer onClick={onClickHandler} aria-hidden='true'>
+            <span>Next</span>
+          </footer>
+        }
+
+
+      </InputContainer>
+    </div>
+  );
 }
 
 const Header = styled.header`
@@ -54,13 +58,13 @@ const Header = styled.header`
   font-size: 20px;
   font-weight: 500;
   height: 52px;
-  
-  span{
+
+  span {
     position: relative;
     top: 13px;
   }
-  
-  img{
+
+  img {
     position: relative;
     right: 108px;
     top: 13px;
@@ -72,8 +76,8 @@ const SettingTitle = styled.div`
   text-align: center;
   justify-content: center;
   gap: 140px;
-  
-  span{
+
+  span {
     font-size: 12px;
   }
 `;
@@ -85,47 +89,53 @@ const InputContainer = styled.div`
   flex-direction: row;
   padding: 13px 16px;
   gap: 8px;
-  
-  footer{
+
+  footer {
     position: fixed;
     bottom: 40px;
-    background-color: #3A3F45;
+    background-color: #dfdfdf; // isChecked 가 true 일때 -> #3A3F45;
     color: white;
     border-radius: 30px;
     width: 80%;
     height: 60px;
     cursor: pointer;
-    
-    span{
+
+    span {
       font-size: 18px;
       position: relative;
       top: 20px;
     }
   }
-  
+
 `;
 
-const SelectorWrap = styled.div`
-  width: 160px;
+interface SelectorWrapProp {
+  isChecked: boolean;
+}
+
+
+const SelectorWrap = styled.div<SelectorWrapProp>`
+  width: 164px;
   height: 40px;
   background-color: #F9F9F9;
   border-radius: 30px;
   cursor: pointer;
-  
-  .check-box{
+
+  .check-box {
     position: relative;
-    right: 40px;
     top: 11px;
-    color: ${props => props.color};//#F9F9F9; // 클릭 이벤트 발생시 #F9F9F9 컬러에서 -> black 컬로 변경 
-    border: 1px solid #A1A1A1; // 클릭 이벤트시 -> none 으로 변경
+    right: 40px;
+    color: ${(props) => props.isChecked ? '#000000' : '#f9f9f9'};
+    border: 1px solid #A1A1A1;
     border-radius: 10px;
   }
 
-  span{
+  span {
     position: relative;
     top: 8px;
     right: 24px;
   }
 `;
+
 
 export default SettingGender;

@@ -3,7 +3,7 @@ import { useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {FiSearch as SearchIcon} from 'react-icons/fi';
 import { MdCancel as DeleteBtn} from 'react-icons/md';
-import backBtn from '../icons/icon-4.png'
+import backBtn from '../icons/icon-5.png'
 
 const Header = styled.header`
   text-align: center;
@@ -87,7 +87,7 @@ const FooterWrap = styled.footer`
 
 function SettingLocation() {
     const navigate = useNavigate()
-    function onClickHandler() {
+    const onClickHandler = () => {
         navigate('/setting_done')
     }
     return(
@@ -95,7 +95,7 @@ function SettingLocation() {
             <Header>
                 <img src={backBtn} alt='backButton' onClick={() => {
                     navigate(-1);
-                }}/>
+                }} onKeyDown={onClickHandler}/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>

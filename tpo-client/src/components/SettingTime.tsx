@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
-import backBtn from '../icons/icon-4.png'
+import backBtn from '../icons/icon-5.png'
 
 
 
@@ -100,9 +100,8 @@ const FooterWrap = styled.footer`
   }
 `;
 function SettingTime() {
-
     const navigate = useNavigate()
-    function onClickHandle() {
+    const onClickHandle = () => {
         navigate('/setting_location');
     }
     return(
@@ -110,7 +109,7 @@ function SettingTime() {
             <Header>
                 <img src={backBtn} alt='backButton' onClick={() => {
                     navigate(-1)
-                }}/>
+                }} onKeyDown={onClickHandle}/>
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
