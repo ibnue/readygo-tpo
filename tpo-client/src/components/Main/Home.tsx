@@ -5,12 +5,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import COLORS from '../../styles/colors'
 import { FONT_STYLES } from '../../styles/font-style';
 
-import IcLocation from '../../assets/ic-location.png';
-import IcAlarm from '../../assets/ic-alarm.png';
-import IcSettings from '../../assets/ic-settings.png';
-import IcDivision from '../../assets/ic-division-white.png';
-import IcDivisionGray from '../../assets/ic-division-gray.png';
-import IcClock from '../../assets/ic-clock.png';
+import IcLocation from '../../assets/icons/ic-location.png';
+import IcAlarm from '../../assets/icons/ic-alarm.png';
+import IcSettings from '../../assets/icons/ic-settings.png';
+import IcDivision from '../../assets/icons/ic-division-white.png';
+import IcDivisionGray from '../../assets/icons/ic-division-gray.png';
+import IcClock from '../../assets/icons/ic-clock.png';
 import MainSample from '../../assets/img-main-sample.png';
 import DummyCard from '../../assets/img-dummy-card.png';
 
@@ -277,4 +277,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Home;
