@@ -1,19 +1,18 @@
 package com.readygo.tpo.user.domain;
 
 import com.readygo.tpo.common.domain.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "users")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseTimeEntity {
 
     @Id
@@ -26,6 +25,11 @@ public class User extends BaseTimeEntity {
 
     private String email;
 
+    @ElementCollection(targetClass = StyleCategory.class)
+    @CollectionTable(name = "user_style")
+    @Column(name = "style")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Enumerated(EnumType.STRING)
     private List<StyleCategory> favoriteStyles;
 
     private int startHour;
