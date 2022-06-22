@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Home from '../src/components/Main/Home'
 import SettingGender from "./components/SettingGender";
 import SettingStyle from "./components/SettingStyle";
 import SettingTime from "./components/SettingTime";
