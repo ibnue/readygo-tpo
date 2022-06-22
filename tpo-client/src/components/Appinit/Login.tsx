@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleLogin  from 'react-google-login';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -62,27 +62,20 @@ const ImgGoogle = styled.img`
 `;
 
 function Login() {
-  // const [userObj, setUserObj]=useState({
-  //   email:"",
-  //   name:""
-  // })
+  const [userObj, setUserObj]=useState({
+    email:"",
+    name:""
+  })
 
-  // const onLoginSuccess=(res:any)=>{
-  //   setUserObj({...userObj,
-  //     email:res.profileObj.email,
-  //     name:res.profileObj.name
-  //   })
-  // }
+  const onLoginSuccess = (res:any)=>{
+    setUserObj({...userObj,
+      email:res.profileObj.email,
+      name:res.profileObj.name
+    })
+  }
 
   return (
     <div>
-      {/* <GoogleLogin
-        clientId='381022787166-3o85p0aqvdk9ts00ch0tqj5oci3q7jjd.apps.googleusercontent.com'
-        buttonText="Google로 계속하기"
-        onSuccess={result => onLoginSuccess(result)}
-        onFailure={result => console.log(result)}
-        cookiePolicy="single_host_origin"
-      /> */}
       <MainWrapper>
         <SubWrapper>
           <StBanner src={ImgBanner} />
@@ -91,10 +84,19 @@ function Login() {
           <Text.Sub>temperature of your location</Text.Sub>
         </SubWrapper>
 
-          <LoginBtn>
-            <ImgGoogle src={IcGoogle} />
-            <Text.Login>Continue with Google</Text.Login>
-          </LoginBtn>
+        <GoogleLogin
+          clientId='381022787166-3o85p0aqvdk9ts00ch0tqj5oci3q7jjd.apps.googleusercontent.com'
+          buttonText="Continue with Google"
+          onSuccess={result => onLoginSuccess(result)}
+          onFailure={result => console.log(result)}
+          cookiePolicy="single_host_origin"
+          render={renderProps => (
+            <LoginBtn type='button' onClick={renderProps.onClick}>
+              <ImgGoogle src={IcGoogle} />
+              <Text.Login>Continue with Google</Text.Login>
+            </LoginBtn>
+          )}
+        />
       </MainWrapper>
         
     </div>

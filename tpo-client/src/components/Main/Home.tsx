@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { Pagination, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import COLORS from '../../styles/colors'
@@ -183,7 +184,16 @@ const images = [DummyCard, DummyCard, DummyCard, DummyCard, DummyCard, DummyCard
   }
 
 
-function Home() {
+function Home(props) {
+
+  // lat,lon: 사용자의 위도, 경도 params 필요
+  useEffect(() => {
+    axios.get('/api/weather?lat=&lon=',)
+      .then((response) => {
+        console.log(response.data);
+      })
+  }, [])
+  
   return (
     <div>
       <Styled.System />
