@@ -12,6 +12,7 @@ interface MultiRangeSliderProps {
 
 function SettingTime({min,max,onChange}:MultiRangeSliderProps){
     const navigate = useNavigate()
+
     const onClickHandle = () => {
         navigate('/setting/location');
     }

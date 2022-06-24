@@ -4,7 +4,7 @@ import {Header,SettingTitle,InputContainer,SelectorWrap} from "../styles/GenderS
 import backBtn from '../assets/icons/back-icon.png';
 import checkCircle from '../assets/icons/circle-icon.png';
 import emptyCircle from '../assets/icons/empty-circle.png';
-import UserSettingHeader from "./UserSettingHeader";
+import SelectGender from "./SelectGender";
 
 function SettingGender() {
     const navigate = useNavigate();

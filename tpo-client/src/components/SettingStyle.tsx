@@ -4,13 +4,11 @@ import {Header,SettingTitle,SelectStyledWrapper,StyleOptions,FooterWrap} from ".
 import backBtn from '../assets/icons/back-icon.png';
 import checkCircle from '../assets/icons/circle-icon.png';
 import emptyCircle from "../assets/icons/empty-circle.png";
-import UserSettingHeader from "./UserSettingHeader";
 
 
 function SettingStyle() {
 
     const navigate = useNavigate();
-
     const onClickHandler = () => {
         if(myStyle.length >= 1){
             navigate('/setting/time');
@@ -20,7 +18,7 @@ function SettingStyle() {
 
     }
 
-    const [myStyle , setMyStyle] = useState([]);
+    const [myStyle , setMyStyle] = useState<string[]>([]);
 
     const styleList = [
         'Casual',
