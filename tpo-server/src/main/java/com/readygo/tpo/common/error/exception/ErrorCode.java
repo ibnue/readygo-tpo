@@ -13,6 +13,7 @@ public enum ErrorCode {
 
     AUTH_ERROR(400, "AU001", "인증 오류가 발생했습니다."),
     DUPLICATED_EMAIL(400, "AU002", "이미 존재하는 이메일입니다."),
+    UNAUTHORIZED_REDIRECT_URI(400, "AU003", "인증되지 않은 REDIRECT_URI입니다."),
 
     USER_NOT_FOUND(400, "U001", "해당 사용자가 존재하지 않습니다.");
 
