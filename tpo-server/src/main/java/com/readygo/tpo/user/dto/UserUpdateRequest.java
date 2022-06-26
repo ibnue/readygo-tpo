@@ -5,15 +5,11 @@ import lombok.Getter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
 public class UserUpdateRequest {
-
-    @NotNull
-    private String name;
 
     @Min(value = 6, message = "출근 시간은 6시 이후여야 합니다.")
     @Max(value = 22, message = "출근 시간은 22시를 넘을 수 없습니다.")

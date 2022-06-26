@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,6 +24,9 @@ public class User extends BaseTimeEntity {
 
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @ElementCollection(targetClass = StyleCategory.class)
     @CollectionTable(name = "user_style")
     @Column(name = "style")
@@ -37,12 +39,34 @@ public class User extends BaseTimeEntity {
     private int endHour;
 
     @Builder
-    public User(String name, Gender gender, String email, List<StyleCategory> favoriteStyles, int startHour, int endHour) {
+    public User(String name, Gender gender, String email, Role role) {
         this.name = name;
         this.gender = gender;
         this.email = email;
+        this.role = role;
+    }
+
+    public User update(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public User update(List<StyleCategory> favoriteStyles, int startHour, int endHour) {
         this.favoriteStyles = favoriteStyles;
         this.startHour = startHour;
         this.endHour = endHour;
+        return this;
+    }
+
+    public User update(Gender gender, List<StyleCategory> favoriteStyles, int startHour, int endHour) {
+        this.gender = gender;
+        this.favoriteStyles = favoriteStyles;
+        this.startHour = startHour;
+        this.endHour = endHour;
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
     }
 }

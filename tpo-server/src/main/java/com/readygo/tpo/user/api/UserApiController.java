@@ -1,5 +1,6 @@
 package com.readygo.tpo.user.api;
 
+import com.readygo.tpo.config.security.CurrentUser;
 import com.readygo.tpo.user.application.UserService;
 import com.readygo.tpo.user.domain.User;
 import com.readygo.tpo.user.dto.UserRegisterRequest;
@@ -20,25 +21,25 @@ public class UserApiController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegisterRequest registerRequest) {
-        Long userId = userService.registerUser(registerRequest);
-        return ResponseEntity.created(URI.create("/api/user/" + userId)).build();
+    public ResponseEntity<UserResponse> registerUser(@CurrentUser User user, @Valid @RequestBody UserRegisterRequest registerRequest) {
+        User registeredUser = userService.registerUser(user, registerRequest);
+        return ResponseEntity.ok(UserResponse.of(registeredUser));
     }
 
     @PutMapping("/me")
-    public ResponseEntity<Void> updateUser(User user, @Valid @RequestBody UserUpdateRequest updateRequest) {
-        userService.updateUser(user, updateRequest);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UserResponse> updateUser(@CurrentUser User user, @Valid @RequestBody UserUpdateRequest updateRequest) {
+        User updatedUser = userService.updateUser(user, updateRequest);
+        return ResponseEntity.ok(UserResponse.of(updatedUser));
     }
 
     @DeleteMapping("/me")
-    public ResponseEntity<Void> deleteUser(User user) {
+    public ResponseEntity<Void> deleteUser(@CurrentUser User user) {
         userService.deleteUser(user);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getUser(User user) {
+    public ResponseEntity<UserResponse> getUser(@CurrentUser User user) {
         return ResponseEntity.ok(UserResponse.of(user));
     }
 }

@@ -1,7 +1,5 @@
 package com.readygo.tpo.user.application;
 
-import com.readygo.tpo.common.error.exception.AuthException;
-import com.readygo.tpo.common.error.exception.ErrorCode;
 import com.readygo.tpo.user.dao.UserRepository;
 import com.readygo.tpo.user.domain.User;
 import com.readygo.tpo.user.dto.UserRegisterRequest;
@@ -17,19 +15,19 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Long registerUser(UserRegisterRequest registerRequest) {
-        if(userRepository.existsByEmail(registerRequest.getEmail())) {
-            throw new AuthException(ErrorCode.DUPLICATED_EMAIL);
-        }
-        return userRepository.save(registerRequest.toEntity()).getId();
+    public User registerUser(User user, UserRegisterRequest registerRequest) {
+        return user.update(
+                registerRequest.getGender(),
+                registerRequest.getStyle(),
+                registerRequest.getStartHour(),
+                registerRequest.getEndHour());
     }
 
-    public void updateUser(User user, UserUpdateRequest updateRequest) {
-        user.setName(updateRequest.getName());
-        user.setStartHour(updateRequest.getStartHour());
-        user.setEndHour(updateRequest.getEndHour());
-        user.setFavoriteStyles(updateRequest.getStyle());
-        userRepository.save(user);
+    public User updateUser(User user, UserUpdateRequest updateRequest) {
+        return user.update(
+                updateRequest.getStyle(),
+                updateRequest.getStartHour(),
+                updateRequest.getEndHour());
     }
 
     public void deleteUser(User user) {
