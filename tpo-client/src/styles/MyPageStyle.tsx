@@ -56,5 +56,24 @@ export const Container = styled.div`
       top: 16px;
     }
   }
-  
+`;
+
+export const Header = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  height: 52px;
+
+  span {
+    position: relative;
+    top: 13px;
+  }
+
+  img {
+    width: 8px;
+    cursor: pointer;
+    position: relative;
+    right: 108px;
+    top: 13px;
+  }
 `;

@@ -7,17 +7,20 @@ import backBtn from '../assets/icons/back-icon.png'
 interface MultiRangeSliderProps {
     min: number;
     max: number;
-    onChange: any;
+    minVal: number;
+    maxVal: number;
+    startTime:any;
+    endTime:any
 }
 
-function SettingTime({min,max,onChange}:MultiRangeSliderProps){
+function SettingTime({min,max,minVal,maxVal,startTime,endTime}:MultiRangeSliderProps){
     const navigate = useNavigate()
 
     const onClickHandle = () => {
         navigate('/setting/location');
     }
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
+    // const [minVal, setMinVal] = useState<number>(min);
+    // const [maxVal, setMaxVal] = useState<number>(max);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
@@ -54,9 +57,9 @@ function SettingTime({min,max,onChange}:MultiRangeSliderProps){
     }, [maxVal, getPercent]);
 
     // Get min and max values when their state changes
-    useEffect(() => {
-        onChange({ min: minVal, max: maxVal });
-    }, [minVal, maxVal, onChange]);
+    // useEffect(() => {
+    //     onChange({ min: minVal, max: maxVal });
+    // }, [minVal, maxVal, onChange]);
 
 
     return (
@@ -81,7 +84,7 @@ function SettingTime({min,max,onChange}:MultiRangeSliderProps){
                         ref={minValRef}
                         onChange={(event) => {
                             const value = Math.min(+event.target.value, maxVal - 1);
-                            setMinVal(value);
+                            startTime(value);
                             event.target.value = value.toString();
                             // minValRef.current = value;
                         }}
@@ -98,7 +101,7 @@ function SettingTime({min,max,onChange}:MultiRangeSliderProps){
                         ref={maxValRef}
                         onChange={(event) => {
                             const value = Math.max(+event.target.value, minVal + 1);
-                            setMaxVal(value);
+                            endTime(value);
                             event.target.value = value.toString();
                             // maxValRef.current = value;
                         }}

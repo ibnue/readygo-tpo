@@ -1,13 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import axios from 'axios';
 import {Header,SettingTitle,SearchContainer,FooterWrap} from "../styles/LocationStyle";
 import backBtn from '../assets/icons/back-icon.png';
 import searchIcon from '../assets/icons/search-ic.png';
 import deleteIcon from '../assets/icons/cancel-icon.png';
 
-function SettingLocation() {
+interface User {
+    sex:string
+    myStyle:string[]
+    minVal:number
+    maxVal:number
+}
+
+function SettingLocation({sex,myStyle,minVal,maxVal}:User) {
+
     const navigate = useNavigate()
     const onClickHandler = () => {
+        axios({
+            url:"/api/users",
+            method:'post',
+            data: {
+                gender:sex,
+                style:myStyle,
+                start_hour:minVal,
+                end_hour:maxVal
+            },
+            baseURL:'http://localhost:8080'
+        })
         navigate('/setting/done')
     }
     return(

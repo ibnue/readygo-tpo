@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import {Header,SettingTitle,InputContainer,SelectorWrap} from "../styles/GenderStyle";
 import backBtn from '../assets/icons/back-icon.png';
 import checkCircle from '../assets/icons/circle-icon.png';
 import emptyCircle from '../assets/icons/empty-circle.png';
-import SelectGender from "./SelectGender";
 
-function SettingGender() {
+
+function SettingGender({gender,selectGender}: string|any) {
     const navigate = useNavigate();
-    const [gender, setGender] = useState<string>();
-
+    // const [gender, setGender] = useState<string>();
     const GENDER = {
         male: 'Male',
         female: 'Female',
@@ -38,7 +38,7 @@ function SettingGender() {
                 {['Male', 'Female'].map((obj) => {
                     return (
                         <SelectorWrap onClick={() => {
-                            setGender(obj)
+                            selectGender(obj)
                         }} isChecked={gender === obj}>
                             <img src={emptyCircle} alt='check-icon' className='empty-circle'/>
                             <img src={checkCircle} alt='check-icon' className='check-box'/>

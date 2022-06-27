@@ -6,7 +6,7 @@ import checkCircle from '../assets/icons/circle-icon.png';
 import emptyCircle from "../assets/icons/empty-circle.png";
 
 
-function SettingStyle() {
+function SettingStyle({myStyle, selectStyle}: string[]|any ) {
 
     const navigate = useNavigate();
     const onClickHandler = () => {
@@ -18,7 +18,7 @@ function SettingStyle() {
 
     }
 
-    const [myStyle , setMyStyle] = useState<string[]>([]);
+    // const [myStyle , setMyStyle] = useState<string[]>([]);
 
     const styleList = [
         'Casual',
@@ -32,9 +32,9 @@ function SettingStyle() {
 
     const makeMyStyleList = (item) => {
         if(!myStyle.includes(item)){
-            setMyStyle( [...myStyle, item])
+            selectStyle( [...myStyle, item])
         } else {
-            setMyStyle(myStyle.map( n => {return n}).filter( value => value !== item))
+            selectStyle(myStyle.map( n => {return n}).filter( value => value !== item))
         }
     }
     return (
@@ -50,7 +50,7 @@ function SettingStyle() {
                 <span>2/4</span>
             </SettingTitle>
             <SelectStyledWrapper>
-                {styleList.map((item,index) => {
+                {styleList.map((item) => {
                     return (
                         <StyleOptions onClick={ () => {
                             makeMyStyleList(item)
@@ -61,9 +61,6 @@ function SettingStyle() {
                         </StyleOptions>
                     )
                 })}
-                {
-
-                }
                 <FooterWrap onClick={onClickHandler} onActive={myStyle.length >= 1}>
                     <div>Next</div>
                 </FooterWrap>

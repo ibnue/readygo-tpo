@@ -1,9 +1,16 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 import {BackgroundWrap,IconWrap,FooterWrap} from "../styles/EndStyle";
 import Logo from '../assets/icons/logo.png';
 
 
 function Congratulation() {
+
+    const navigate = useNavigate()
+    const onClickPageMove = () => {
+        navigate('/mypage');
+    }
+
     return (
         <BackgroundWrap>
             <IconWrap>
@@ -14,7 +21,7 @@ function Congratulation() {
                         temperature of your location <strong>Right Now!</strong></p>
                 </div>
             </IconWrap>
-            <FooterWrap>
+            <FooterWrap onClick={onClickPageMove}>
                 <div>Next</div>
             </FooterWrap>
         </BackgroundWrap>
