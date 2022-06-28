@@ -16,22 +16,26 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
+    private boolean success;
+
     private String message;
 
-    private List<FieldError> errors;
+    private List<FieldError> error;
 
     private String code;
 
-    private ErrorResponse(ErrorCode code, List<FieldError> errors) {
+    private ErrorResponse(ErrorCode code, List<FieldError> error) {
+        this.success = false;
         this.message = code.getMessage();
         this.code = code.getCode();
-        this.errors = errors;
+        this.error = error;
     }
 
     private ErrorResponse(ErrorCode code) {
+        this.success = false;
         this.message = code.getMessage();
         this.code = code.getCode();
-        this.errors = new ArrayList<>();
+        this.error = new ArrayList<>();
     }
 
     public static ErrorResponse of(ErrorCode code, BindingResult bindingResult) {

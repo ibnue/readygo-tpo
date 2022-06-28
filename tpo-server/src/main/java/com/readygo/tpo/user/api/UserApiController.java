@@ -1,5 +1,7 @@
 package com.readygo.tpo.user.api;
 
+import com.readygo.tpo.common.ApiResponse;
+import com.readygo.tpo.common.ResponseMessage;
 import com.readygo.tpo.config.security.CurrentUser;
 import com.readygo.tpo.user.application.UserService;
 import com.readygo.tpo.user.domain.User;
@@ -11,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,25 +22,28 @@ public class UserApiController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> registerUser(@CurrentUser User user, @Valid @RequestBody UserRegisterRequest registerRequest) {
+    public ApiResponse<UserResponse> registerUser(@CurrentUser User user, @Valid @RequestBody UserRegisterRequest registerRequest) {
         User registeredUser = userService.registerUser(user, registerRequest);
-        return ResponseEntity.ok(UserResponse.of(registeredUser));
+        UserResponse userResponse = UserResponse.of(registeredUser);
+        return ApiResponse.res(ResponseMessage.CREATED_USER, userResponse);
     }
 
     @PutMapping("/me")
-    public ResponseEntity<UserResponse> updateUser(@CurrentUser User user, @Valid @RequestBody UserUpdateRequest updateRequest) {
+    public ApiResponse<UserResponse> updateUser(@CurrentUser User user, @Valid @RequestBody UserUpdateRequest updateRequest) {
         User updatedUser = userService.updateUser(user, updateRequest);
-        return ResponseEntity.ok(UserResponse.of(updatedUser));
+        UserResponse userResponse = UserResponse.of(updatedUser);
+        return ApiResponse.res(ResponseMessage.UPDATE_USER, userResponse);
     }
 
     @DeleteMapping("/me")
-    public ResponseEntity<Void> deleteUser(@CurrentUser User user) {
+    public ApiResponse<Void> deleteUser(@CurrentUser User user) {
         userService.deleteUser(user);
-        return ResponseEntity.noContent().build();
+        return ApiResponse.res(ResponseMessage.DELETE_USER);
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getUser(@CurrentUser User user) {
-        return ResponseEntity.ok(UserResponse.of(user));
+    public ApiResponse<UserResponse> getUser(@CurrentUser User user) {
+        UserResponse userResponse = UserResponse.of(user);
+        return ApiResponse.res(ResponseMessage.READ_USER, userResponse);
     }
 }
