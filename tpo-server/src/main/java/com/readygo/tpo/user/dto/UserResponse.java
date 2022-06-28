@@ -1,5 +1,7 @@
 package com.readygo.tpo.user.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.readygo.tpo.user.domain.Gender;
 import com.readygo.tpo.user.domain.Role;
 import com.readygo.tpo.user.domain.StyleCategory;
@@ -9,6 +11,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserResponse {
 
     private Long id;
