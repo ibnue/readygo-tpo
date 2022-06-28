@@ -1,4 +1,4 @@
-package com.readygo.tpo.common.error;
+package com.readygo.tpo.common.error.exception;
 
 import com.readygo.tpo.common.error.exception.ErrorCode;
 import lombok.AccessLevel;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
-    private boolean success;
+    private boolean success = false;
 
     private String message;
 
@@ -25,14 +25,12 @@ public class ErrorResponse {
     private String code;
 
     private ErrorResponse(ErrorCode code, List<FieldError> error) {
-        this.success = false;
         this.message = code.getMessage();
         this.code = code.getCode();
         this.error = error;
     }
 
     private ErrorResponse(ErrorCode code) {
-        this.success = false;
         this.message = code.getMessage();
         this.code = code.getCode();
         this.error = new ArrayList<>();
