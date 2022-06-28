@@ -1,5 +1,7 @@
 package com.readygo.tpo.user.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.readygo.tpo.user.domain.StyleCategory;
 import lombok.Getter;
 
@@ -9,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserUpdateRequest {
 
     @Min(value = 6, message = "출근 시간은 6시 이후여야 합니다.")

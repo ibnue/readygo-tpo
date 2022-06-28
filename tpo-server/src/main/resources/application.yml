@@ -1,18 +1,18 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+    url: jdbc:h2:tcp://localhost/~/test
     driver-class-name: org.h2.Driver
+    username: sa
   profiles:
     include:
       - oauth
       - API-KEY
-
-jpa:
-  hibernate:
-    ddl-auto: create
-  properties:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    defer-datasource-initialization: true
     hibernate:
-      show_sql: true
-      format_sql: true
+      ddl-auto: create-drop
+    show_sql: true
+    generate-ddl: true
