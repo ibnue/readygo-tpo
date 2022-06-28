@@ -16,18 +16,22 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User registerUser(User user, UserRegisterRequest registerRequest) {
-        return user.update(
+        user.update(
                 registerRequest.getGender(),
                 registerRequest.getStyle(),
                 registerRequest.getStartHour(),
                 registerRequest.getEndHour());
+
+        return userRepository.save(user);
     }
 
     public User updateUser(User user, UserUpdateRequest updateRequest) {
-        return user.update(
+        user.update(
                 updateRequest.getStyle(),
                 updateRequest.getStartHour(),
                 updateRequest.getEndHour());
+
+        return userRepository.save(user);
     }
 
     public void deleteUser(User user) {
