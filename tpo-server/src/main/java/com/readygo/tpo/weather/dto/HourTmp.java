@@ -10,4 +10,12 @@ import lombok.Setter;
 public class HourTmp {
     private int hour;
     private int tmp;
+
+    @Override
+    public String toString() {
+        return "HourTmp{" +
+                "hour=" + hour +
+                ", tmp=" + tmp +
+                '}';
+    }
 }

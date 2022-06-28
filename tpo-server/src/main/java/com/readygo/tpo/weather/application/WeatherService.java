@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -38,11 +40,11 @@ public class WeatherService {
                 .build();
     }
 
-    public WeatherResponse getWeather(User user, WeatherRequest request) {
+    public WeatherResponse getWeather(User user, double lat, double lon) throws ParseException {
         BaseDateTime baseDateTime = getBaseDateTime();
-        Grid grid = changeGpsToGrid(request.getLat(), request.getLon());
+        Grid grid = changeGpsToGrid(lat, lon);
 
-        JSONObject result = webClient.get()
+        String result = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/getVilageFcst")
                         .queryParam("serviceKey", API_KEY.getKey())
                         .queryParam("numOfRows", 1000)
@@ -52,9 +54,13 @@ public class WeatherService {
                         .queryParam("base_time", baseDateTime.getTime())
                         .queryParam("nx", grid.getNx())
                         .queryParam("ny", grid.getNy()).build())
-                .retrieve().bodyToMono(JSONObject.class).block();
+                .retrieve().bodyToMono(String.class).block();
 
-        JSONObject body = (JSONObject) result.get("body");
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) parser.parse(result);
+
+        JSONObject response = (JSONObject) jsonObj.get("response");
+        JSONObject body = (JSONObject) response.get("body");
         JSONObject items = (JSONObject) body.get("items");
         JSONArray item = (JSONArray) items.get("item");
 
@@ -65,68 +71,78 @@ public class WeatherService {
         int fcstValue;
 
         HourlyFcst current = new HourlyFcst(now.getHour());
-        DailyFcst today = new DailyFcst(now.toLocalDate());
-        DailyFcst tomorrow = new DailyFcst(now.plusDays(1).toLocalDate());
+        DailyFcst today = new DailyFcst(
+                now.toLocalDate(),
+                new HourTmp(Integer.MAX_VALUE, Integer.MAX_VALUE),
+                new HourTmp(Integer.MIN_VALUE, Integer.MIN_VALUE));
 
-        HourTmp todayLocalMin = new HourTmp(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        HourTmp todayLocalMax = new HourTmp(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        HourTmp tmrLocalMin = new HourTmp(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        HourTmp tmrLocalMax = new HourTmp(Integer.MIN_VALUE, Integer.MIN_VALUE);
+        DailyFcst tomorrow = new DailyFcst(
+                now.plusDays(1).toLocalDate(),
+                new HourTmp(Integer.MAX_VALUE, Integer.MAX_VALUE),
+                new HourTmp(Integer.MIN_VALUE, Integer.MIN_VALUE));
 
         for(int i = 0; i < item.size(); i++) {
             object = (JSONObject) item.get(i);
             category = (String) object.get("category");
-            fcstDate = LocalDate.parse((String) object.get("fcstDate"));
+            fcstDate = LocalDate.parse((String) object.get("fcstDate"), DateTimeFormatter.BASIC_ISO_DATE);
             fcstTime = Integer.parseInt(object.get("fcstTime").toString().substring(0, 2));
-            fcstValue = Integer.parseInt((String) object.get("fcstValue"));
 
-            if(fcstDate == today.getDate() && fcstTime == current.getHour()) {
+            if(fcstDate.isEqual(today.getDate()) && fcstTime == current.getHour()) {
                 switch (category) {
                     case "TMP":
+                        fcstValue = Integer.parseInt((String) object.get("fcstValue"));
                         current.setTmp(fcstValue);
+                        break;
                     case "REH":
+                        fcstValue = Integer.parseInt((String) object.get("fcstValue"));
                         current.setHumidity(fcstValue);
+                        break;
                     case "SKY":
+                        fcstValue = Integer.parseInt((String) object.get("fcstValue"));
                         current.setSkyType(SkyType.findByCode(fcstValue));
+                        break;
                     case "PTY":
+                        fcstValue = Integer.parseInt((String) object.get("fcstValue"));
                         current.setRainType(RainType.findByCode(fcstValue));
+                        break;
                 }
             }
 
-            if(category.equals("TMP") && fcstDate == today.getDate()) {
+            if(fcstDate.isEqual(today.getDate()) && category.equals("TMP")) {
                 if(fcstTime >= user.getStartHour() && fcstTime <= user.getEndHour()) {
-                    if(fcstValue < todayLocalMin.getTmp()) {
-                        todayLocalMin.setTmp(fcstValue);
-                        todayLocalMin.setHour(fcstTime);
+                    fcstValue = Integer.parseInt((String) object.get("fcstValue"));
+                    if(fcstValue < today.getLocalMin().getTmp()) {
+                        today.getLocalMin().setTmp(fcstValue);
+                        today.getLocalMin().setHour(fcstTime);
                     }
-                    if(fcstValue > todayLocalMax.getTmp()) {
-                        todayLocalMax.setTmp(fcstValue);
-                        todayLocalMax.setHour(fcstTime);
+                    if(fcstValue > today.getLocalMax().getTmp()) {
+                        today.getLocalMax().setTmp(fcstValue);
+                        today.getLocalMax().setHour(fcstTime);
                     }
                 }
             }
 
-            if(category.equals("TMP") && fcstDate == tomorrow.getDate()) {
+            if(fcstDate.isEqual(tomorrow.getDate()) && category.equals("TMP")) {
                 if(fcstTime >= user.getStartHour() && fcstTime <= user.getEndHour()) {
-                    if(fcstValue < tmrLocalMin.getTmp()) {
-                        tmrLocalMin.setTmp(fcstValue);
-                        tmrLocalMin.setHour(fcstTime);
+                    fcstValue = Integer.parseInt((String) object.get("fcstValue"));
+                    if(fcstValue < tomorrow.getLocalMin().getTmp()) {
+                        tomorrow.getLocalMin().setTmp(fcstValue);
+                        tomorrow.getLocalMin().setHour(fcstTime);
                     }
-                    if(fcstValue > tmrLocalMax.getTmp()) {
-                        tmrLocalMax.setTmp(fcstValue);
-                        tmrLocalMax.setHour(fcstTime);
+                    if(fcstValue > tomorrow.getLocalMax().getTmp()) {
+                        tomorrow.getLocalMax().setTmp(fcstValue);
+                        tomorrow.getLocalMax().setHour(fcstTime);
                     }
                 }
             }
         }
 
-        today.setLocalMax(todayLocalMax);
-        today.setLocalMin(todayLocalMin);
-        tomorrow.setLocalMax(tmrLocalMax);
-        tomorrow.setLocalMin(tmrLocalMin);
+        System.out.println("current = " + current);
+        System.out.println("today = " + today);
+        System.out.println("tomorrow = " + tomorrow);
 
         return WeatherResponse.builder()
-                .baseDate(LocalDate.parse(baseDateTime.date))
+                .baseDate(LocalDate.parse(baseDateTime.date, DateTimeFormatter.BASIC_ISO_DATE))
                 .baseTime(Integer.parseInt(baseDateTime.time.substring(0, 2)))
                 .nx(grid.nx)
                 .ny(grid.ny)
