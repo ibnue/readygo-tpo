@@ -1,5 +1,7 @@
 package com.readygo.tpo.weather.api;
 
+import com.readygo.tpo.common.ApiResponse;
+import com.readygo.tpo.common.ResponseMessage;
 import com.readygo.tpo.config.security.CurrentUser;
 import com.readygo.tpo.user.domain.User;
 import com.readygo.tpo.weather.application.WeatherService;
@@ -17,8 +19,8 @@ public class WeatherApiController {
     private final WeatherService weatherService;
 
     @GetMapping
-    public ResponseEntity<WeatherResponse> getWeather(@CurrentUser User user, @RequestParam double lat, @RequestParam double lon) throws ParseException {
+    public ApiResponse<WeatherResponse> getWeather(@CurrentUser User user, @RequestParam double lat, @RequestParam double lon) throws ParseException {
         WeatherResponse weatherResponse = weatherService.getWeather(user, lat, lon);
-        return ResponseEntity.ok(weatherResponse);
+        return ApiResponse.res(ResponseMessage.LOOKUP_WEATHER, weatherResponse);
     }
 }
