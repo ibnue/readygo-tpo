@@ -1,7 +1,6 @@
 package com.readygo.tpo.weather.application;
 
 import com.readygo.tpo.user.domain.User;
-import com.readygo.tpo.weather.ApiKey;
 import com.readygo.tpo.weather.domain.RainType;
 import com.readygo.tpo.weather.domain.SkyType;
 import com.readygo.tpo.weather.dto.*;
@@ -11,6 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,13 +23,13 @@ import java.time.format.DateTimeFormatter;
 @Transactional
 public class WeatherService {
 
-    private final ApiKey API_KEY;
+    private Environment env;
     private final String BASE_URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0";
     private final WebClient webClient;
     private final LocalDateTime now = LocalDateTime.now();
 
-    public WeatherService(ApiKey apiKey, WebClient.Builder webClientBuilder) {
-        this.API_KEY = apiKey;
+    public WeatherService(Environment env, WebClient.Builder webClientBuilder) {
+        this.env = env;
 
         DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(BASE_URL);
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
@@ -46,7 +46,7 @@ public class WeatherService {
 
         String result = webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/getVilageFcst")
-                        .queryParam("serviceKey", API_KEY.getKey())
+                        .queryParam("serviceKey", env.getProperty("kmakey"))
                         .queryParam("numOfRows", 1000)
                         .queryParam("pageNo", 1)
                         .queryParam("dataType", "JSON")
