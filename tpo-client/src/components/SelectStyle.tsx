@@ -3,9 +3,12 @@ import {StyleOptions} from "../styles/StylesSetStyle";
 import emptyCircle from "../assets/icons/empty-circle.png";
 import checkCircle from "../assets/icons/circle-icon.png";
 
-function SelectStyle() {
+interface PropsData {
+    myStyle: string[]
+    selectStyle: (value:string[]) => void
+}
 
-    const [myStyle , setMyStyle] = useState([]);
+function SelectStyle({myStyle,selectStyle}: PropsData) {
 
     const styleList = [
         'Casual',
@@ -19,9 +22,9 @@ function SelectStyle() {
 
     const makeMyStyleList = (item) => {
         if(!myStyle.includes(item)){
-            setMyStyle( [...myStyle, item])
+            selectStyle( [...myStyle, item])
         } else {
-            setMyStyle(myStyle.map( n => {return n}).filter( value => value !== item))
+            selectStyle(myStyle.map( n => {return n}).filter( value => value !== item))
         }
     }
 

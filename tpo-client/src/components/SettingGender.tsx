@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
 import {Header,SettingTitle,InputContainer,SelectorWrap} from "../styles/GenderStyle";
 import backBtn from '../assets/icons/back-icon.png';
 import checkCircle from '../assets/icons/circle-icon.png';
 import emptyCircle from '../assets/icons/empty-circle.png';
+import SelectGender from './SelectGender';
+
+interface Gender {
+    gender:string
+    selectGender: (value:string) => void
+}
 
 
-function SettingGender({gender,selectGender}: string|any) {
+function SettingGender({gender,selectGender}: Gender) {
     const navigate = useNavigate();
-    // const [gender, setGender] = useState<string>();
+
     const GENDER = {
         male: 'Male',
         female: 'Female',
@@ -23,7 +28,6 @@ function SettingGender({gender,selectGender}: string|any) {
         }
     };
 
-
     return (
         <div>
             <Header>
@@ -35,18 +39,7 @@ function SettingGender({gender,selectGender}: string|any) {
                 <span>1/4</span>
             </SettingTitle>
             <InputContainer>
-                {['Male', 'Female'].map((obj) => {
-                    return (
-                        <SelectorWrap onClick={() => {
-                            selectGender(obj)
-                        }} isChecked={gender === obj}>
-                            <img src={emptyCircle} alt='check-icon' className='empty-circle'/>
-                            <img src={checkCircle} alt='check-icon' className='check-box'/>
-                            <span>{obj}</span>
-                        </SelectorWrap>
-                    );
-                })
-                }
+              <SelectGender gender={gender} selectGender={selectGender}/>
                 {
                     gender === GENDER.male || gender === GENDER.female ?
                         <footer onClick={onClickHandler} aria-hidden='true' style={{backgroundColor: '#3A3F45'}}>

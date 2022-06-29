@@ -5,14 +5,15 @@ import {SliderBar} from "../styles/TimeStyle";
 interface MultiRangeSliderProps {
     min: number;
     max: number;
-    onChange: any;
+    minVal:number;
+    maxVal:number;
+    startTime: (value: number) => void
+    endTime: (value: number) => void
 }
 
 
-function SetTime({min, max, onChange}: MultiRangeSliderProps) {
+function SetTime({min, max, minVal, maxVal, startTime, endTime}: MultiRangeSliderProps) {
 
-    const [minVal, setMinVal] = useState(min);
-    const [maxVal, setMaxVal] = useState(max);
     const minValRef = useRef<HTMLInputElement>(null);
     const maxValRef = useRef<HTMLInputElement>(null);
     const range = useRef<HTMLDivElement>(null);
@@ -49,9 +50,9 @@ function SetTime({min, max, onChange}: MultiRangeSliderProps) {
     }, [maxVal, getPercent]);
 
     // Get min and max values when their state changes
-    useEffect(() => {
-        onChange({min: minVal, max: maxVal});
-    }, [minVal, maxVal, onChange]);
+    // useEffect(() => {
+    //     onChange({min: minVal, max: maxVal});
+    // }, [minVal, maxVal, onChange]);
 
 
     return (
@@ -65,7 +66,7 @@ function SetTime({min, max, onChange}: MultiRangeSliderProps) {
                     ref={minValRef}
                     onChange={(event) => {
                         const value = Math.min(+event.target.value, maxVal - 1);
-                        setMinVal(value);
+                        startTime(value);
                         event.target.value = value.toString();
                         // minValRef.current = value;
                     }}
@@ -82,7 +83,7 @@ function SetTime({min, max, onChange}: MultiRangeSliderProps) {
                     ref={maxValRef}
                     onChange={(event) => {
                         const value = Math.max(+event.target.value, minVal + 1);
-                        setMaxVal(value);
+                        endTime(value);
                         event.target.value = value.toString();
                         // maxValRef.current = value;
                     }}

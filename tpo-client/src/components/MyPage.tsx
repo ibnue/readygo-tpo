@@ -6,8 +6,20 @@ import {SetTime} from "./SetTime";
 import {Container, Header} from "../styles/MyPageStyle";
 import backBtn from "../assets/icons/back-icon.png";
 
+interface PropsData {
+  gender: string
+  selectGender: (value: string) => void
+  myStyle: string[]
+  selectStyle: (value: string[]) => void
+  startTime: (value: number) => void
+  endTime: (value: number) => void
+  minVal: number,
+  maxVal: number,
+  min:number,
+  max:number,
+}
 
-function MyPage() {
+function MyPage({gender,selectGender,myStyle,selectStyle,startTime,endTime,minVal,maxVal,min,max} : PropsData) {
 
     const navigate = useNavigate()
 
@@ -27,15 +39,13 @@ function MyPage() {
                 <input type='text' placeholder='Name'/>
             </div>
             <div className='gender-section'>
-                <SelectGender/>
+                <SelectGender gender={gender} selectGender={selectGender}/>
             </div>
             <div className='style-section'>
-                <SelectStyle/>
+                <SelectStyle myStyle={myStyle} selectStyle={selectStyle}/>
             </div>
             <div className='time-section'>
-                <SetTime min={0} max={24} onChange={({min,max}: {min:number; max:number}) => {
-                    console.log(`min = ${min}, max=${max}`)
-                }} />
+                <SetTime minVal={minVal} maxVal={maxVal} startTime={startTime} endTime={endTime} min={0} max={24}/>
             </div>
             <div className='footer-button'>
                 <footer>

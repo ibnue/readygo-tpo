@@ -40,7 +40,18 @@ function App() {
           <Route path='/setting/time' element={ <SettingTime startTime={startTime} endTime={endTime} minVal={minVal} maxVal={maxVal} min={0} max={24}/>}/>
           <Route path='/setting/location' element={<SettingLocation sex={gender} myStyle={myStyle} minVal={minVal} maxVal={maxVal} />}/>
           <Route path='/setting/done' element={<Congratulation />} />
-          <Route path='/mypage' element={<MyPage/>} />
+          <Route path='/mypage' element={<MyPage
+            gender={gender}
+            selectGender={selectGender}
+            myStyle={myStyle}
+            selectStyle={selectStyle}
+            startTime={startTime}
+            endTime={endTime}
+            minVal={minVal}
+            maxVal={maxVal}
+            min={0}
+            max={24}
+          />} />
         </Routes>
       </Router>
     </div>
