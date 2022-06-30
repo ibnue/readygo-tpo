@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleOptions} from "../styles/StylesSetStyle";
 import emptyCircle from "../assets/icons/empty-circle.png";
 import checkCircle from "../assets/icons/circle-icon.png";
 
-interface PropsData {
+interface UserStyle {
     myStyle: string[]
-    selectStyle: (value:string[]) => void
+    changeStyle: (value:string[]) => void
 }
 
-function SelectStyle({myStyle,selectStyle}: PropsData) {
+function SetStyle({myStyle,changeStyle}: UserStyle) {
 
     const styleList = [
         'Casual',
@@ -22,9 +22,9 @@ function SelectStyle({myStyle,selectStyle}: PropsData) {
 
     const makeMyStyleList = (item) => {
         if(!myStyle.includes(item)){
-            selectStyle( [...myStyle, item])
+            changeStyle( [...myStyle, item])
         } else {
-            selectStyle(myStyle.map( n => {return n}).filter( value => value !== item))
+            changeStyle(myStyle.map( n => {return n}).filter( value => value !== item))
         }
     }
 
@@ -45,4 +45,4 @@ function SelectStyle({myStyle,selectStyle}: PropsData) {
     )
 }
 
-export default SelectStyle;
+export default SetStyle;

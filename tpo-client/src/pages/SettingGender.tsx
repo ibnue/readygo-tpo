@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Header,SettingTitle,InputContainer,SelectorWrap} from "../styles/GenderStyle";
+import {Header,SettingTitle,InputContainer} from "../styles/GenderStyle";
 import backBtn from '../assets/icons/back-icon.png';
-import checkCircle from '../assets/icons/circle-icon.png';
-import emptyCircle from '../assets/icons/empty-circle.png';
-import SelectGender from './SelectGender';
+import SetGender from '../components/SetGender';
 
 interface Gender {
     gender:string
-    selectGender: (value:string) => void
+    changeGender: (value:string) => void
 }
 
 
-function SettingGender({gender,selectGender}: Gender) {
+function SettingGender({gender,changeGender}: Gender) {
     const navigate = useNavigate();
 
     const GENDER = {
@@ -39,7 +37,7 @@ function SettingGender({gender,selectGender}: Gender) {
                 <span>1/4</span>
             </SettingTitle>
             <InputContainer>
-              <SelectGender gender={gender} selectGender={selectGender}/>
+              <SetGender gender={gender} changeGender={changeGender}/>
                 {
                     gender === GENDER.male || gender === GENDER.female ?
                         <footer onClick={onClickHandler} aria-hidden='true' style={{backgroundColor: '#3A3F45'}}>

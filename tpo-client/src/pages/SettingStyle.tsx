@@ -1,17 +1,15 @@
-import React, {useRef, useState} from 'react'
+import React from 'react'
 import {useNavigate} from "react-router-dom";
-import {Header,SettingTitle,SelectStyledWrapper,StyleOptions,FooterWrap} from "../styles/StylesSetStyle";
+import {Header,SettingTitle,SelectStyledWrapper,FooterWrap} from "../styles/StylesSetStyle";
 import backBtn from '../assets/icons/back-icon.png';
-import checkCircle from '../assets/icons/circle-icon.png';
-import emptyCircle from "../assets/icons/empty-circle.png";
-import SelectStyle from './SelectStyle';
+import SetStyle from '../components/SetStyle';
 
-interface UserStyles {
+interface UserStyle {
     myStyle: string[]
-    selectStyle: (value:string[]) => void
+    changeStyle: (value:string[]) => void
 }
 
-function SettingStyle({myStyle, selectStyle}: UserStyles ) {
+function SettingStyle({myStyle, changeStyle}: UserStyle ) {
 
     const navigate = useNavigate();
 
@@ -37,7 +35,7 @@ function SettingStyle({myStyle, selectStyle}: UserStyles ) {
                 <span>2/4</span>
             </SettingTitle>
             <SelectStyledWrapper>
-                <SelectStyle myStyle={myStyle} selectStyle={selectStyle}/>
+                <SetStyle myStyle={myStyle} changeStyle={changeStyle}/>
                 <FooterWrap onClick={onClickHandler} onActive={myStyle.length >= 1}>
                     <div>Next</div>
                 </FooterWrap>

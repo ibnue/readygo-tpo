@@ -1,22 +1,21 @@
 import React from 'react';
-import {useState} from "react";
 import {SelectorWrap} from "../styles/GenderStyle";
 import emptyCircle from "../assets/icons/empty-circle.png";
 import checkCircle from "../assets/icons/circle-icon.png";
 
 interface GenderState {
     gender : string,
-    selectGender : (value: string) => void;
+    changeGender : (value: string) => void;
 }
 
-function SelectGender({gender, selectGender}: GenderState) {
+function SetGender({gender, changeGender}: GenderState) {
 
     return (
         <>
             {['Male', 'Female'].map((obj) => {
                 return (
                     <SelectorWrap onClick={() => {
-                        selectGender(obj)
+                        changeGender(obj)
                     }} isChecked={gender === obj}>
                         <img src={emptyCircle} alt='check-icon' className='empty-circle'/>
                         <img src={checkCircle} alt='check-icon' className='check-box'/>
@@ -29,5 +28,5 @@ function SelectGender({gender, selectGender}: GenderState) {
     )
 }
 
-export default SelectGender;
+export default SetGender;
 

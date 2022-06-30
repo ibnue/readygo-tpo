@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import SettingGender from "./components/SettingGender";
-import SettingStyle from "./components/SettingStyle";
-import SettingTime from "./components/SettingTime";
-import SettingLocation from "./components/SettingLocation";
-import Congratulation from "./components/Congratulation";
-import MyPage from "./components/MyPage";
+import SettingGender from "./pages/SettingGender";
+import SettingStyle from "./pages/SettingStyle";
+import SettingTime from "./pages/SettingTime";
+import SettingLocation from "./pages/SettingLocation";
+import Congratulation from "./pages/Congratulation";
+import UserSetting from "./pages/UserSetting";
+import Setting from './pages/Setting';
 
 function App() {
 
@@ -14,11 +15,11 @@ function App() {
   const [minVal, setMinVal] = useState<number>(0);
   const [maxVal, setMaxVal] = useState<number>(24);
 
-  const selectGender = (props) => {
+  const changeGender = (props) => {
     setGender(props)
   }
 
-  const selectStyle = (props) => {
+  const changeStyle = (props) => {
     setMyStyle(props)
   }
 
@@ -35,16 +36,21 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/setting/gender' element={ <SettingGender gender={gender} selectGender={selectGender}/>}  />
-          <Route path='/setting/style' element={ <SettingStyle myStyle={myStyle} selectStyle={selectStyle} />} />
+          <Route path='/setting/gender' element={ <SettingGender gender={gender} changeGender={changeGender}/>}  />
+          <Route path='/setting/style' element={ <SettingStyle myStyle={myStyle} changeStyle={changeStyle} />} />
           <Route path='/setting/time' element={ <SettingTime startTime={startTime} endTime={endTime} minVal={minVal} maxVal={maxVal} min={0} max={24}/>}/>
-          <Route path='/setting/location' element={<SettingLocation sex={gender} myStyle={myStyle} minVal={minVal} maxVal={maxVal} />}/>
-          <Route path='/setting/done' element={<Congratulation />} />
-          <Route path='/mypage' element={<MyPage
-            gender={gender}
-            selectGender={selectGender}
+          <Route path='/setting/location' element={<SettingLocation
+            sex={gender}
             myStyle={myStyle}
-            selectStyle={selectStyle}
+            minVal={minVal}
+            maxVal={maxVal}
+          />}/>
+          <Route path='/setting/done' element={<Congratulation />} />
+          <Route path='/setting/usersetting' element={<UserSetting
+            gender={gender}
+            changeGender={changeGender}
+            myStyle={myStyle}
+            changeStyle={changeStyle}
             startTime={startTime}
             endTime={endTime}
             minVal={minVal}
@@ -52,6 +58,7 @@ function App() {
             min={0}
             max={24}
           />} />
+          <Route path='setting' element={<Setting/>} />
         </Routes>
       </Router>
     </div>

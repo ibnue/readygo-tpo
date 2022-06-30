@@ -1,16 +1,16 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom";
-import SelectGender from "./SelectGender";
-import SelectStyle from "./SelectStyle";
-import {SetTime} from "./SetTime";
+import SetGender from "../components/SetGender";
+import SetStyle from "../components/SetStyle";
+import {SetTime} from "../components/SetTime";
 import {Container, Header} from "../styles/MyPageStyle";
 import backBtn from "../assets/icons/back-icon.png";
 
 interface PropsData {
   gender: string
-  selectGender: (value: string) => void
+  changeGender: (value: string) => void
   myStyle: string[]
-  selectStyle: (value: string[]) => void
+  changeStyle: (value: string[]) => void
   startTime: (value: number) => void
   endTime: (value: number) => void
   minVal: number,
@@ -19,7 +19,7 @@ interface PropsData {
   max:number,
 }
 
-function MyPage({gender,selectGender,myStyle,selectStyle,startTime,endTime,minVal,maxVal,min,max} : PropsData) {
+function UserSetting({gender,changeGender,myStyle,changeStyle,startTime,endTime,minVal,maxVal,min,max} : PropsData) {
 
     const navigate = useNavigate()
 
@@ -39,10 +39,10 @@ function MyPage({gender,selectGender,myStyle,selectStyle,startTime,endTime,minVa
                 <input type='text' placeholder='Name'/>
             </div>
             <div className='gender-section'>
-                <SelectGender gender={gender} selectGender={selectGender}/>
+                <SetGender gender={gender} changeGender={changeGender}/>
             </div>
             <div className='style-section'>
-                <SelectStyle myStyle={myStyle} selectStyle={selectStyle}/>
+                <SetStyle myStyle={myStyle} changeStyle={changeStyle}/>
             </div>
             <div className='time-section'>
                 <SetTime minVal={minVal} maxVal={maxVal} startTime={startTime} endTime={endTime} min={0} max={24}/>
@@ -56,4 +56,4 @@ function MyPage({gender,selectGender,myStyle,selectStyle,startTime,endTime,minVa
     )
 }
 
-export default MyPage;
+export default UserSetting;

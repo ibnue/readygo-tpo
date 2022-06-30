@@ -1,9 +1,8 @@
-import React, {useState, FC, useRef, useCallback, useEffect} from 'react'
-import classnames from 'classnames';
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Header, SettingTitle, SliderWrap,SliderBar,FooterWrap} from "../styles/TimeStyle";
 import backBtn from '../assets/icons/back-icon.png'
-import { SetTime } from './SetTime';
+import { SetTime } from '../components/SetTime';
 
 interface MultiRangeSliderProps {
     min: number;

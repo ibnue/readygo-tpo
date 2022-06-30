@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import classnames from "classnames";
 import {SliderBar} from "../styles/TimeStyle";
 
@@ -49,12 +49,6 @@ function SetTime({min, max, minVal, maxVal, startTime, endTime}: MultiRangeSlide
         }
     }, [maxVal, getPercent]);
 
-    // Get min and max values when their state changes
-    // useEffect(() => {
-    //     onChange({min: minVal, max: maxVal});
-    // }, [minVal, maxVal, onChange]);
-
-
     return (
         <div>
             <SliderBar>
@@ -68,7 +62,6 @@ function SetTime({min, max, minVal, maxVal, startTime, endTime}: MultiRangeSlide
                         const value = Math.min(+event.target.value, maxVal - 1);
                         startTime(value);
                         event.target.value = value.toString();
-                        // minValRef.current = value;
                     }}
                     className={classnames("thumb thumb-zindex-3", {
                         "thumb-zindex-5": minVal > max - 100
@@ -85,7 +78,6 @@ function SetTime({min, max, minVal, maxVal, startTime, endTime}: MultiRangeSlide
                         const value = Math.max(+event.target.value, minVal + 1);
                         endTime(value);
                         event.target.value = value.toString();
-                        // maxValRef.current = value;
                     }}
                     className="thumb thumb-zindex-4"
                 />

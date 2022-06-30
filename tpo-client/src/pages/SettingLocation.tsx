@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
-import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
+import axios from 'axios';
 import {Header, SettingTitle, SearchContainer, FooterWrap} from "../styles/LocationStyle";
 import backBtn from '../assets/icons/back-icon.png';
 import searchIcon from '../assets/icons/search-ic.png';
@@ -21,20 +21,19 @@ function SettingLocation({sex, myStyle, minVal, maxVal}: User) {
     const onClickHandler = () => {
         axios({
             method: 'post',
-            url: "{{http://localhost:3000}}/api/users",
+            url: " http://readygo-tpo.p-e.kr:808",
             data: {
                 gender: sex,
                 style: myStyle,
                 start_hour: minVal,
                 end_hour: maxVal
             },
-            // baseURL: 'http://readygo-tpo.p-e.kr:8080'
         }).then((res) => {
             navigate('/setting/done')
-        })
+        }).catch(error => console.log('Error'))
         console.log(sex, myStyle, minVal, maxVal)
-
     }
+
     return (
         <div>
             <Header>
