@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios, { AxiosRequestConfig } from 'axios';
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link,useNavigate} from 'react-router-dom';
 
 import { Pagination, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -189,6 +189,9 @@ const images = [DummyCard, DummyCard, DummyCard, DummyCard, DummyCard, DummyCard
 
 
 function Home(props) {
+
+    const navigate = useNavigate()
+
   const variable = {
     data: {
       lat: 37,
@@ -274,7 +277,9 @@ function Home(props) {
       <Component.Margin>
         <Category.Header>
           <Category.TitleTxt>Top</Category.TitleTxt>
-          <Category.MoreTxt>More</Category.MoreTxt>
+          <Category.MoreTxt onClick={ () => {
+            navigate('/contents')
+          }}>More</Category.MoreTxt>
         </Category.Header>
 
         <ImgSwiper.Wrap>
