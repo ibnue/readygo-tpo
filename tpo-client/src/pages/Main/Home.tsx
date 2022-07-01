@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios, { AxiosRequestConfig } from 'axios';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 import { Pagination, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import COLORS from '../../styles/colors'
 import { FONT_STYLES } from '../../styles/font-style';
-import Location from '../../components/Main/Location';
+import Location from '../Main/Location';
+import Setting from '../Setting';
 
 import IcLocation from '../../assets/icons/ic-location.png';
 import IcAlarm from '../../assets/icons/ic-alarm.png';
@@ -230,7 +232,9 @@ function Home(props) {
 
         <Styled.RightIconWrap>
           <Icon.Alarm src={IcAlarm} />
-          <Icon.Settings src={IcSettings} />
+          <Link to='../Setting'>
+            <Icon.Settings src={IcSettings}/>
+          </Link>
         </Styled.RightIconWrap>
       </Styled.Header>
 

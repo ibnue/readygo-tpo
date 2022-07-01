@@ -8,9 +8,9 @@ import Congratulation from "./pages/Congratulation";
 import UserSetting from "./pages/UserSetting";
 import Setting from './pages/Setting';
 
-import Home from '../src/components/Main/Home'
+import Home from './pages/Main/Home'
 import Login from './pages/Appinit/Login';
-import Location from './components/Main/Location';
+import Location from './pages/Main/Location';
 
 function App() {
 
