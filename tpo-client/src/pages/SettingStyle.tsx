@@ -31,8 +31,8 @@ function SettingStyle({myStyle, changeStyle}: UserStyle ) {
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
-                <span>Style</span>
-                <span>2/4</span>
+                <span className='title'>Style</span>
+                <span className='set-count'>2/4</span>
             </SettingTitle>
             <SelectStyledWrapper>
                 <SetStyle myStyle={myStyle} changeStyle={changeStyle}/>

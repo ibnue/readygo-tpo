@@ -29,8 +29,8 @@ function SettingTime({min,max,minVal,maxVal,startTime,endTime}:MultiRangeSliderP
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
-                <span>Time</span>
-                <span>3/4</span>
+                <span className='title'>Time</span>
+                <span className='set-count'>3/4</span>
             </SettingTitle>
             <SliderWrap>
                 <SetTime min={0} max={24} minVal={minVal} maxVal={maxVal} startTime={startTime} endTime={endTime} />
