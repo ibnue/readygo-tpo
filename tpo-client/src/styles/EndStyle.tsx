@@ -1,27 +1,7 @@
-import React from 'react';
 import styled from "styled-components";
-import Logo from '../assets/icons/logo.png';
 
 
-function Congratulation() {
-    return (
-        <BackgroundWrap>
-            <IconWrap>
-                <img alt='logo' src={Logo}/>
-                <div className='text-container'>
-                    <p className='text'>Congratulation!</p>
-                    <p className='second-text'>Find clothes <strong>suitable</strong> for the<br/>
-                        temperature of your location <strong>Right Now!</strong></p>
-                </div>
-            </IconWrap>
-            <FooterWrap>
-                <div>Next</div>
-            </FooterWrap>
-        </BackgroundWrap>
-    )
-}
-
-const BackgroundWrap = styled.div`
+export const BackgroundWrap = styled.div`
   * {
     margin: 0;
   }
@@ -33,15 +13,15 @@ const BackgroundWrap = styled.div`
   background-color: #000000;
 `;
 
-const FooterWrap = styled.footer`
+export const FooterWrap = styled.footer`
   display: flex;
   justify-content: center;
   background-color: #FFFFFF;
   border-radius: 100px;
   width: 80%;
   height: 52px;
-  position: fixed;
-  bottom: 40px;
+  position: absolute;
+  bottom: 20px;
   cursor: pointer;
 
   div {
@@ -52,7 +32,7 @@ const FooterWrap = styled.footer`
   }
 `;
 
-const IconWrap = styled.div`
+export const IconWrap = styled.div`
   background-color: black;
 
   img {
@@ -85,5 +65,3 @@ const IconWrap = styled.div`
     left: 40px;
   }
 `;
-
-export default Congratulation;
