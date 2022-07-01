@@ -24,6 +24,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import imgData from '../../utils/imgData';
+import imgOuter from '../../utils/imgOuter';
+import imgBottom from '../../utils/imgBottom';
 
 const images = [DummyCard, DummyCard, DummyCard, DummyCard, DummyCard, DummyCard];
 
@@ -291,8 +294,8 @@ function Home(props) {
           freeMode
           loop
           >
-          {images.map((v) => (
-              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
+          {imgData.map((v) => (
+              <SwiperSlide><ImgSwiper.Card src={v.img}/></SwiperSlide>
           ))}
         </Swiper>
       </ImgSwiper.Wrap>
@@ -311,8 +314,8 @@ function Home(props) {
           freeMode
           loop
           >
-          {images.map((v) => (
-              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
+          {imgBottom.map((v) => (
+              <SwiperSlide><ImgSwiper.Card src={v.img}/></SwiperSlide>
           ))}
         </Swiper>
       </ImgSwiper.Wrap>
@@ -331,8 +334,8 @@ function Home(props) {
           freeMode
           loop
           >
-          {images.map((v) => (
-              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
+          {imgOuter.map((v) => (
+              <SwiperSlide><ImgSwiper.Card src={v.img}/></SwiperSlide>
           ))}
         </Swiper>
       </ImgSwiper.Wrap>
