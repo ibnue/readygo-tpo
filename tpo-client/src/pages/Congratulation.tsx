@@ -7,8 +7,9 @@ import Logo from '../assets/icons/logo.png';
 function Congratulation() {
 
     const navigate = useNavigate()
+
     const onClickPageMove = () => {
-        navigate('/mypage');
+        navigate('/setting');
     }
 
     return (

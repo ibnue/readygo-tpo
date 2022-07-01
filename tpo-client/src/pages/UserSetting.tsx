@@ -1,5 +1,6 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom";
+import axios from 'axios';
 import SetGender from "../components/SetGender";
 import SetStyle from "../components/SetStyle";
 import {SetTime} from "../components/SetTime";
@@ -17,9 +18,11 @@ interface PropsData {
   maxVal: number,
   min:number,
   max:number,
+  userName:string
+  getUserName: (value: string) => void
 }
 
-function UserSetting({gender,changeGender,myStyle,changeStyle,startTime,endTime,minVal,maxVal,min,max} : PropsData) {
+function UserSetting({gender,changeGender,myStyle,changeStyle,startTime,endTime,minVal,maxVal,min,max,userName,getUserName} : PropsData) {
 
     const navigate = useNavigate()
 
@@ -36,7 +39,10 @@ function UserSetting({gender,changeGender,myStyle,changeStyle,startTime,endTime,
                 <span>User Setting</span>
             </Header>
             <div className='name-section'>
-                <input type='text' placeholder='Name'/>
+              <input type='text' placeholder='Name' onChange={ (e) => {
+                const getValue = e.target.value
+                getUserName(getValue)
+              }}/>
             </div>
             <div className='gender-section'>
                 <SetGender gender={gender} changeGender={changeGender}/>

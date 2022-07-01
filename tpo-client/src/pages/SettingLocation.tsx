@@ -7,31 +7,13 @@ import backBtn from '../assets/icons/back-icon.png';
 import searchIcon from '../assets/icons/search-ic.png';
 import deleteIcon from '../assets/icons/cancel-icon.png';
 
-interface User {
-    sex: string
-    myStyle: string[]
-    minVal: number
-    maxVal: number
-}
 
-function SettingLocation({sex, myStyle, minVal, maxVal}: User) {
+function SettingLocation() {
 
     const navigate = useNavigate()
 
     const onClickHandler = () => {
-        axios({
-            method: 'post',
-            url: " http://readygo-tpo.p-e.kr:808",
-            data: {
-                gender: sex,
-                style: myStyle,
-                start_hour: minVal,
-                end_hour: maxVal
-            },
-        }).then((res) => {
-            navigate('/setting/done')
-        }).catch(error => console.log('Error'))
-        console.log(sex, myStyle, minVal, maxVal)
+        navigate('/setting/done')
     }
 
     return (

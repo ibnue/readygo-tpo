@@ -32,7 +32,9 @@ function Setting() {
             User Setting
             <img src={nextBtn} alt='nextButton' className='setting-button'/>
           </li>
-          <li>
+          <li onClick={ () => {
+            navigate('location')
+          }} onKeyDown={testFunction}>
             Location
             <img src={nextBtn} alt='nextButton' className='location-button' />
           </li>
