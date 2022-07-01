@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-
+import { FONT_STYLES } from '../styles/font-style';
 
 export const HeaderWrap = styled.div`
   text-align: center;
@@ -78,21 +77,21 @@ export const TextWrap = styled.div`
 
     .terms-button{
       position: relative;
-      left: 240px;
+      left: 235px;
       top: 2px;
       width: 8px;
     }
 
     .policy-button {
       position: relative;
-      left: 260px;
+      left: 253px;
       top: 2px;
       width: 8px;
     }
     
     .attributions-button {
       position: relative;
-      left: 184px;
+      left: 170px;
       top: 2px;
       width: 8px;
     }

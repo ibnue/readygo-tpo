@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios, { AxiosRequestConfig } from 'axios';
-import {BrowserRouter as Router, Routes, Route, Link,useNavigate} from 'react-router-dom';
+import {BrowserRouter as Link, useNavigate} from 'react-router-dom';
 
 import { Pagination, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import COLORS from '../../styles/colors'
 import { FONT_STYLES } from '../../styles/font-style';
 import Location from '../Main/Location';
-import Setting from '../Setting';
 
 import IcLocation from '../../assets/icons/ic-location.png';
 import IcAlarm from '../../assets/icons/ic-alarm.png';
@@ -18,14 +17,40 @@ import IcDivision from '../../assets/icons/ic-division-white.png';
 import IcDivisionGray from '../../assets/icons/ic-division-gray.png';
 import IcClock from '../../assets/icons/ic-clock.png';
 import MainSample from '../../assets/img-main-sample.png';
+
 import DummyCard from '../../assets/img-dummy-card.png';
+import o1 from '../../assets/image-outer/1.jpg';
+import o2 from '../../assets/image-outer/2.jpg';
+import o3 from '../../assets/image-outer/3.jpg';
+import o4 from '../../assets/image-outer/4.jpg';
+import o5 from '../../assets/image-outer/5.jpg';
+import o6 from '../../assets/image-outer/6.jpg';
+import o7 from '../../assets/image-outer/7.jpg';
+import o8 from '../../assets/image-outer/8.jpg';
+import o9 from '../../assets/image-outer/9.jpg';
+import o10 from '../../assets/image-outer/10.jpg';
+import o11 from '../../assets/image-outer/11.jpg';
+
+import b1 from '../../assets/image-onePiece/b1.jpg';
+import b2 from '../../assets/image-onePiece/b2.jpg';
+import b3 from '../../assets/image-onePiece/b3.jpg';
+import b4 from '../../assets/image-onePiece/b4.jpg';
+import b5 from '../../assets/image-onePiece/b5.jpg';
+import b6 from '../../assets/image-onePiece/b6.jpg';
+import b7 from '../../assets/image-onePiece/b7.jpg';
+import b8 from '../../assets/image-onePiece/b8.jpg';
+import b9 from '../../assets/image-onePiece/b9.jpg';
+import b10 from '../../assets/image-onePiece/b10.jpg';
+import b11 from '../../assets/image-onePiece/b11.jpg';
+import b12 from '../../assets/image-onePiece/b12.jpg';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-const images = [DummyCard, DummyCard, DummyCard, DummyCard, DummyCard, DummyCard];
+const outerImgs = [o1, o2, o3, o4, o5, o6, o7, o8, o9, o10, o11];
+const onePieceImgs= [b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12];
 
   const Styled = {
     Wrap: styled.div`
@@ -235,9 +260,11 @@ function Home(props) {
 
         <Styled.RightIconWrap>
           <Icon.Alarm src={IcAlarm} />
-          <Link to='../Setting'>
-            <Icon.Settings src={IcSettings}/>
-          </Link>
+          {/* <Link to='../Setting'> */}
+            <Icon.Settings src={IcSettings} onClick={ () => {
+            navigate('../Setting')
+          }}/>
+          {/* </Link> */}
         </Styled.RightIconWrap>
       </Styled.Header>
 
@@ -287,31 +314,10 @@ function Home(props) {
           slidesPerView={3}
           spaceBetween={5}
           modules={[Pagination, FreeMode]}
-          centeredSlides
-          freeMode
           loop
+          // freeMode
           >
-          {images.map((v) => (
-              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
-          ))}
-        </Swiper>
-      </ImgSwiper.Wrap>
-
-      <Category.Header>
-          <Category.TitleTxt>Bottoms</Category.TitleTxt>
-          <Category.MoreTxt>More</Category.MoreTxt>
-        </Category.Header>
-
-        <ImgSwiper.Wrap>
-          <Swiper
-          slidesPerView={3}
-          spaceBetween={5}
-          modules={[Pagination, FreeMode]}
-          centeredSlides
-          freeMode
-          loop
-          >
-          {images.map((v) => (
+          {outerImgs.map((v) => (
               <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
           ))}
         </Swiper>
@@ -327,11 +333,29 @@ function Home(props) {
           slidesPerView={3}
           spaceBetween={5}
           modules={[Pagination, FreeMode]}
-          centeredSlides
-          freeMode
           loop
+          // freeMode
           >
-          {images.map((v) => (
+          {outerImgs.map((v) => (
+              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
+          ))}
+        </Swiper>
+      </ImgSwiper.Wrap>
+
+      <Category.Header>
+          <Category.TitleTxt>One Piece</Category.TitleTxt>
+          <Category.MoreTxt>More</Category.MoreTxt>
+        </Category.Header>
+
+        <ImgSwiper.Wrap>
+          <Swiper
+          slidesPerView={3}
+          spaceBetween={5}
+          modules={[Pagination, FreeMode]}
+          loop
+          // freeMode
+          >
+          {onePieceImgs.map((v) => (
               <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
           ))}
         </Swiper>

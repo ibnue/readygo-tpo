@@ -9,7 +9,7 @@ function Congratulation() {
     const navigate = useNavigate()
 
     const onClickPageMove = () => {
-        navigate('/');
+        navigate('/home');
     }
 
     return (
