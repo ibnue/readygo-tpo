@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {BrowserRouter as Link, useNavigate} from 'react-router-dom';
 import GoogleLogin  from 'react-google-login';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -66,6 +67,7 @@ function Login() {
     email:"",
     name:""
   })
+  const navigate = useNavigate();
 
   const onLoginSuccess = (res: any) => {
     setUserObj({...userObj,
@@ -77,10 +79,12 @@ function Login() {
   const onLoginHandler = () => {
     const token= '';
 
-    axios.get('http://readygo-tpo.p-e.kr:8080/api/auth/google?redirect_uri=http://readygo-tpo.p-e.kr:8080/oauth2/redirect')
-    .then((response) => {
-        console.log(response);
-      })
+    // axios.get('http://readygo-tpo.p-e.kr:8080/api/auth/google?redirect_uri=http://readygo-tpo.p-e.kr:8080/oauth2/redirect')
+    // .then((response) => {
+    //     console.log(response);
+    //   })
+
+      // navigate('../Main/Home');
   }
 
   return (
@@ -93,11 +97,21 @@ function Login() {
           <Text.Sub>temperature of your location</Text.Sub>
         </SubWrapper>
 
-        <GoogleLogin
-          clientId='381022787166-3o85p0aqvdk9ts00ch0tqj5oci3q7jjd.apps.googleusercontent.com'
+        <LoginBtn type='button' onClick={ () => {
+          navigate('./setting/gender')
+        }}>
+          <ImgGoogle src={IcGoogle} />
+          <Text.Login>Continue with Google</Text.Login>
+        </LoginBtn>
+
+        {/* <GoogleLogin
+          clientId='...'
           buttonText="Continue with Google"
-          onSuccess={result => onLoginSuccess(result)}
-          onFailure={result => console.log(result)}
+          // onSuccess={result => onLoginSuccess(result)}
+          // onFailure={result => console.log(result)}
+          // onFailure={result => {
+          //   navigate('./home')
+          // }}
           cookiePolicy="single_host_origin"
           render={renderProps => (
             <LoginBtn type='button' onClick={renderProps.onClick}>
@@ -105,12 +119,8 @@ function Login() {
               <Text.Login>Continue with Google</Text.Login>
             </LoginBtn>
           )}
-        />
+        /> */}
         
-        <LoginBtn type='button' onClick={onLoginHandler}>
-          <ImgGoogle src={IcGoogle} />
-          <Text.Login>Continue with Google</Text.Login>
-        </LoginBtn>
       </MainWrapper>
         
     </div>
@@ -118,3 +128,7 @@ function Login() {
 }
 
 export default Login;
+
+function sleep(arg0: number) {
+  throw new Error('Function not implemented.');
+}

@@ -47,8 +47,8 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/location' element={<Location />} />
           <Route path='/setting/gender' element={ <SettingGender gender={gender} changeGender={changeGender}/>}  />
           <Route path='/setting/style' element={ <SettingStyle myStyle={myStyle} changeStyle={changeStyle} />} />

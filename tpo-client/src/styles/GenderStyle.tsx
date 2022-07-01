@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
+import { FONT_STYLES } from '../styles/font-style';
+import COLORS from '../styles/colors'
 
 interface SelectorWrapProp {
     isChecked: boolean;
@@ -9,6 +11,7 @@ export const Header = styled.header`
   text-align: center;
   font-size: 20px;
   font-weight: 500;
+  // ${FONT_STYLES.M_16}
   height: 52px;
 
   span {
