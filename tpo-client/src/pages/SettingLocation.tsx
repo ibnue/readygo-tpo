@@ -25,8 +25,8 @@ function SettingLocation() {
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
-                <span>Location</span>
-                <span>4/4</span>
+                <span className='title'>Location</span>
+                <span className='set-count'>4/4</span>
             </SettingTitle>
             <SearchContainer>
                 <img src={searchIcon} alt='search-icon' className='search-icon'/>

@@ -27,14 +27,21 @@ export const Header = styled.header`
 `;
 
 export const SettingTitle = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  gap: 236px;
-
-  span {
-    font-size: 12px;
-  }
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 236px;
+    
+    .title{
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    .set-count {
+        font-size: 12px;
+        color: #838383;
+        
+    }
 `;
 
 export const SelectStyledWrapper = styled.div`

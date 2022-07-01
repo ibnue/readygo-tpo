@@ -29,8 +29,15 @@ export const SettingTitle = styled.div`
   justify-content: center;
   gap: 140px;
 
-  span {
+  .title{
     font-size: 12px;
+    font-weight: bold;
+  }
+
+  .set-count {
+    font-size: 12px;
+    color: #838383;
+
   }
 `;
 
