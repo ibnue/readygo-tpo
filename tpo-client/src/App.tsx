@@ -8,6 +8,10 @@ import Congratulation from "./pages/Congratulation";
 import UserSetting from "./pages/UserSetting";
 import Setting from './pages/Setting';
 
+import Home from './pages/Main/Home'
+import Login from './pages/Appinit/Login';
+import Location from './pages/Main/Location';
+
 function App() {
 
   const [gender, setGender] = useState()
@@ -42,6 +46,9 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/location' element={<Location />} />
           <Route path='/setting/gender' element={ <SettingGender gender={gender} changeGender={changeGender}/>}  />
           <Route path='/setting/style' element={ <SettingStyle myStyle={myStyle} changeStyle={changeStyle} />} />
           <Route path='/setting/time' element={ <SettingTime startTime={startTime} endTime={endTime} minVal={minVal} maxVal={maxVal} min={0} max={24}/>}/>

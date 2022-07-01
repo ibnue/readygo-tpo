@@ -3,22 +3,19 @@
   "name": "TPO",
   "icons": [
     {
-      "src": "favicon-32x32.png",
+      "src": "appLogo_192.png",
       "type": "image/png",
-      "sizes": "32x32"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "favicon-32x32.png",
+      "src": "appLogo_512.png",
       "type": "image/png",
-      "sizes": "32x32"
-    },
-    {
-      "src": "favicon-16x16.png",
-      "type": "image/png",
-      "sizes": "16x16"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/Home/Index",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
