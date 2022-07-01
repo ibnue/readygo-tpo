@@ -11,6 +11,7 @@ import Setting from './pages/Setting';
 import Home from './pages/Main/Home'
 import Login from './pages/Appinit/Login';
 import Location from './pages/Main/Location';
+import MoreContents from './pages/MoreContents';
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
             max={24}
           />} />
           <Route path='setting' element={<Setting/>} />
+          <Route path='contents' element={<MoreContents />} />
         </Routes>
       </Router>
     </div>
