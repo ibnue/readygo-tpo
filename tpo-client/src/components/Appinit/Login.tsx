@@ -67,11 +67,20 @@ function Login() {
     name:""
   })
 
-  const onLoginSuccess = (res:any)=>{
+  const onLoginSuccess = (res: any) => {
     setUserObj({...userObj,
       email:res.profileObj.email,
       name:res.profileObj.name
     })
+  }
+
+  const onLoginHandler = () => {
+    const token= '';
+
+    axios.get('http://readygo-tpo.p-e.kr:8080/api/auth/google?redirect_uri=http://readygo-tpo.p-e.kr:8080/oauth2/redirect')
+    .then((response) => {
+        console.log(response);
+      })
   }
 
   return (
@@ -97,6 +106,11 @@ function Login() {
             </LoginBtn>
           )}
         />
+        
+        <LoginBtn type='button' onClick={onLoginHandler}>
+          <ImgGoogle src={IcGoogle} />
+          <Text.Login>Continue with Google</Text.Login>
+        </LoginBtn>
       </MainWrapper>
         
     </div>

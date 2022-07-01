@@ -39,8 +39,6 @@ function Location() {
   return (
     <Wrapper>
     <div>
-      system 여백+헤드.
-
       <DaumPostcode 
         onComplete={onHandleComplete}
         style={{

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+
 import { Pagination, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import COLORS from '../../styles/colors'
 import { FONT_STYLES } from '../../styles/font-style';
+import Location from '../../components/Main/Location';
 
 import IcLocation from '../../assets/icons/ic-location.png';
 import IcAlarm from '../../assets/icons/ic-alarm.png';
@@ -178,25 +181,47 @@ const images = [DummyCard, DummyCard, DummyCard, DummyCard, DummyCard, DummyCard
       height: 156px;
     `,
     Card: styled.img`
-      // width: 108px;
       height: 144px;
     `,
   }
 
 
 function Home(props) {
+  const variable = {
+    data: {
+      lat: 37,
+      lon: 127
+    }
+  };
+
+  const fashionVariable = {
+    data: {
+      style: 'office',
+      max: 14,
+      min: 50
+    }
+  };
 
   // lat,lon: 사용자의 위도, 경도 params 필요
+  // http://localhost:3000/api/weather?lat=37.56667&lon=126.97806
   useEffect(() => {
-    axios.get('/api/weather?lat=&lon=',)
+    axios.get('http://readygo-tpo.p-e.kr:8080/api/weather?lat=37.56667&lon=126.97806', variable)
       .then((response) => {
         console.log(response.data);
       })
   }, [])
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/api/fashion?style="casual"&style="office"&min=18&max=29', fashionVariable)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     })
+  // }, [])
+  
   
   return (
     <div>
-      <Styled.System />
+      {/* <Styled.System /> */}
       <Styled.Header>
         <Styled.LeftWrap>
           <Icon.Location src={IcLocation} />
@@ -245,6 +270,26 @@ function Home(props) {
       <Component.Margin>
         <Category.Header>
           <Category.TitleTxt>Top</Category.TitleTxt>
+          <Category.MoreTxt>More</Category.MoreTxt>
+        </Category.Header>
+
+        <ImgSwiper.Wrap>
+          <Swiper
+          slidesPerView={3}
+          spaceBetween={5}
+          modules={[Pagination, FreeMode]}
+          centeredSlides
+          freeMode
+          loop
+          >
+          {images.map((v) => (
+              <SwiperSlide><ImgSwiper.Card src={v}/></SwiperSlide>
+          ))}
+        </Swiper>
+      </ImgSwiper.Wrap>
+
+      <Category.Header>
+          <Category.TitleTxt>Bottoms</Category.TitleTxt>
           <Category.MoreTxt>More</Category.MoreTxt>
         </Category.Header>
 
