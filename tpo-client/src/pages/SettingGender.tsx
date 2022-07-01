@@ -33,8 +33,8 @@ function SettingGender({gender,changeGender}: Gender) {
                 <span>User Setting</span>
             </Header>
             <SettingTitle>
-                <span>Gender</span>
-                <span>1/4</span>
+                <span className='title'>Gender</span>
+                <span className='set-count'>1/4</span>
             </SettingTitle>
             <InputContainer>
               <SetGender gender={gender} changeGender={changeGender}/>

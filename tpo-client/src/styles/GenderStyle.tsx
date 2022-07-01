@@ -25,14 +25,22 @@ export const Header = styled.header`
 `;
 
 export const SettingTitle = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  gap: 140px;
-
-  span {
-    font-size: 12px;
-  }
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 140px;
+    
+    .title {
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+        left: -40px;
+    }
+    
+    .set-count {
+        font-size: 12px;
+        color: #838383;
+    }
 `;
 
 export const InputContainer = styled.div`
