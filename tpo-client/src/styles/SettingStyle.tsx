@@ -40,17 +40,17 @@ export const SettingWrap = styled.div`
     margin: 12px;
     list-style: none;
     cursor: pointer;
-    
+
     .setting-button{
       position: relative;
-      left: 270px;
+      left: 73.9%;//270px;
       top: 2px;
       width: 8px;
     }
-    
+
     .location-button {
       position: relative;
-      left: 295px;
+      left: 80.5%;//295px;
       top: 2px;
       width: 8px;
     }
@@ -77,21 +77,22 @@ export const TextWrap = styled.div`
 
     .terms-button{
       position: relative;
-      left: 235px;
+      left: 66%;//235px;
       top: 2px;
       width: 8px;
     }
 
     .policy-button {
       position: relative;
-      left: 253px;
+      left: 71.5%;//253px;
       top: 2px;
       width: 8px;
     }
     
+    
     .attributions-button {
       position: relative;
-      left: 170px;
+      left: 51.5%;//170px;
       top: 2px;
       width: 8px;
     }

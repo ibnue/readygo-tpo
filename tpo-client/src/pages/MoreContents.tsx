@@ -1,9 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import imgData from '../utils/imgData'
 import backBtn from '../assets/icons/back-icon.png';
 import dummyImg from '../assets/img-dummy-card.png';
+import ImgData from '../utils/imgData';
 
+
+interface ImageType {
+  id:number,
+  img:string
+}
 
 
 export const HeaderWrap = styled.div`
@@ -42,7 +49,14 @@ const CardContainer = styled.div`
   }
 `;
 
+interface ImageType {
+  id:number,
+  img:string
+}
+
 function MoreContents() {
+
+
 
   const navigate = useNavigate()
   const testFuc = () => {
@@ -59,94 +73,11 @@ function MoreContents() {
         <span>Top</span>
       </HeaderWrap>
       <CardContainer>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
-        <img src={dummyImg} alt='dummy-img'/>
+        {ImgData.map( (obj) => {
+          return(
+            <img src={obj.img} alt='dummy-img'/>
+          )
+        })}
       </CardContainer>
     </div>
   )
